@@ -1,0 +1,1393 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lernmaterial zur Körperberechnung in Jahrgang 10: Quader, Würfel, Zylinder, Kegel, Pyramide, Pyramidenstumpf und Kugel.">
+  <title>Körperberechnung – Lernmaterial Jahrgang 10</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18324b;
+      --muted: #52677a;
+      --paper: #ffffff;
+      --wash: #f2f7fa;
+      --line: #cfdae2;
+      --blue: #176b9b;
+      --blue-light: #d9eff9;
+      --orange: #bb5a20;
+      --orange-light: #fff0df;
+      --green: #26704b;
+      --green-light: #e4f4ea;
+      --purple: #694b91;
+      --purple-light: #f0eafa;
+      --shadow: 0 10px 30px rgb(24 50 75 / 8%);
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #eaf0f4;
+      line-height: 1.6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body { margin: 0; }
+
+    header {
+      padding: 3.5rem 1.25rem 2.8rem;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 82% 15%, rgb(255 255 255 / 13%) 0 12%, transparent 12.5%),
+        linear-gradient(130deg, #123b5b, #176b9b 68%, #2387a1);
+    }
+
+    .hero, main, footer {
+      width: min(100% - 2rem, 1080px);
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 .45rem;
+      color: #bce7fa;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 750px;
+      margin: 0;
+      font-size: clamp(2.1rem, 6vw, 4rem);
+      letter-spacing: -.035em;
+      line-height: 1.05;
+    }
+
+    .hero p:last-of-type {
+      max-width: 700px;
+      margin: 1rem 0 0;
+      color: #e5f5fc;
+      font-size: 1.1rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: 1.4rem;
+    }
+
+    .hero-badges span {
+      padding: .32rem .7rem;
+      border: 1px solid rgb(255 255 255 / 35%);
+      border-radius: 999px;
+      color: #fff;
+      font-size: .85rem;
+    }
+
+    nav {
+      position: sticky;
+      z-index: 2;
+      top: 0;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+      background: rgb(255 255 255 / 96%);
+      box-shadow: 0 3px 12px rgb(24 50 75 / 6%);
+    }
+
+    nav ul {
+      display: flex;
+      width: min(100% - 2rem, 1080px);
+      min-width: max-content;
+      gap: .25rem;
+      margin: 0 auto;
+      padding: .45rem 0;
+      list-style: none;
+    }
+
+    nav a {
+      display: block;
+      padding: .42rem .68rem;
+      border-radius: 6px;
+      color: var(--ink);
+      font-size: .9rem;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    nav a:hover, nav a:focus-visible { background: var(--blue-light); }
+
+    main { padding: 1.5rem 0 3rem; }
+
+    section {
+      scroll-margin-top: 4.5rem;
+      margin: 0 0 1.25rem;
+      padding: clamp(1.1rem, 3vw, 2rem);
+      border: 1px solid #e0e7ec;
+      border-radius: 16px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    section:focus { outline: 3px solid var(--blue); }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0 0 1rem;
+      font-size: clamp(1.55rem, 4vw, 2.1rem);
+      line-height: 1.2;
+    }
+
+    h3 { margin: 1.2rem 0 .5rem; font-size: 1.15rem; }
+    p { margin: .55rem 0; }
+    ul, ol { padding-left: 1.35rem; }
+    li + li { margin-top: .28rem; }
+    .section-number {
+      display: grid;
+      width: 2.35rem;
+      height: 2.35rem;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue-light);
+      color: #10577f;
+      font-size: .98rem;
+      font-weight: 800;
+    }
+
+    .lead { max-width: 790px; color: var(--muted); font-size: 1.03rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .panel {
+      min-width: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfdfe;
+    }
+    .panel h3:first-child { margin-top: 0; }
+    .figure {
+      display: grid;
+      min-height: 200px;
+      place-items: center;
+      margin: .6rem 0;
+      padding: .5rem;
+      border-radius: 10px;
+      background: var(--wash);
+    }
+    .figure figcaption {
+      width: min(100%, 560px);
+      margin-top: .3rem;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.45;
+    }
+    .figure svg.wide-diagram { width: min(100%, 560px); }
+    .source-links {
+      margin: .9rem 0;
+      padding: .85rem 1rem;
+      border: 1px solid #c6d8e5;
+      border-radius: 10px;
+      background: #f5f9fc;
+    }
+    .source-links h3 { margin: 0 0 .35rem; color: var(--blue); }
+    .source-links li + li { margin-top: .35rem; }
+    .source-links a { color: #075a83; font-weight: 700; text-underline-offset: .15em; }
+    .source-links a:focus-visible { outline: 3px solid #f0a34a; outline-offset: 2px; }
+    .source-note { margin-top: .5rem; color: var(--muted); font-size: .88rem; }
+    svg { display: block; width: min(100%, 410px); height: auto; }
+    svg text { fill: var(--ink); font: 15px "Segoe UI", Arial, sans-serif; }
+    svg .shape { fill: #bfe4f3; stroke: #176b9b; stroke-width: 2.5; }
+    svg .shape-alt { fill: #f8d8b4; stroke: #bb5a20; stroke-width: 2.5; }
+    svg .edge { fill: none; stroke: #244a67; stroke-width: 2.3; }
+    svg .hidden { fill: none; stroke: #738798; stroke-dasharray: 6 5; stroke-width: 1.8; }
+    svg .guide { fill: none; stroke: #52677a; stroke-dasharray: 4 4; stroke-width: 1.7; }
+    svg .accent { fill: none; stroke: #bb5a20; stroke-width: 2.7; }
+    svg .green { fill: none; stroke: #26704b; stroke-width: 2.7; }
+    svg .fill-green { fill: #ccebd6; stroke: #26704b; stroke-width: 2; }
+    svg .fill-orange { fill: #ffe0bd; stroke: #bb5a20; stroke-width: 2; }
+    svg .fill-blue { fill: #d9eff9; stroke: #176b9b; stroke-width: 2; }
+
+    .formula {
+      display: inline-block;
+      margin: .35rem 0;
+      padding: .38rem .7rem;
+      border-radius: 8px;
+      background: var(--blue-light);
+      color: #104f73;
+      font-size: 1.08rem;
+      font-weight: 750;
+      letter-spacing: .01em;
+    }
+    .formula-block {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: .55rem 0;
+      padding: .58rem .85rem;
+      border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      background: var(--blue-light);
+      font-size: 1.08rem;
+      font-weight: 750;
+    }
+    .formula-block.orange { border-color: var(--orange); background: var(--orange-light); }
+    .formula-block.green { border-color: var(--green); background: var(--green-light); }
+    .formula-block.purple { border-color: var(--purple); background: var(--purple-light); }
+    .note, .warning, .derivation {
+      margin: .8rem 0;
+      padding: .8rem 1rem;
+      border-radius: 9px;
+    }
+    .note { background: var(--wash); }
+    .warning { border-left: 4px solid var(--orange); background: var(--orange-light); }
+    .derivation { border-left: 4px solid var(--green); background: var(--green-light); }
+    .derivation h3 { margin-top: 0; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .55rem;
+      margin: .8rem 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+    .steps li {
+      position: relative;
+      margin: 0;
+      padding: .65rem .7rem .65rem 2.35rem;
+      border: 1px solid #c8dfd0;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 70%);
+      counter-increment: step;
+    }
+    .steps li::before {
+      position: absolute;
+      top: .62rem;
+      left: .65rem;
+      display: grid;
+      width: 1.3rem;
+      height: 1.3rem;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      content: counter(step);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+    .tasks {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #f0d1b7;
+      border-radius: 12px;
+      background: #fffaf5;
+    }
+    .tasks h3 { margin-top: 0; color: #844019; }
+    .tasks ol { margin-bottom: .45rem; }
+    .learning-goal {
+      margin: .8rem 0;
+      padding: .7rem .9rem;
+      border-left: 4px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      background: var(--purple-light);
+    }
+    .animation {
+      margin: 1rem 0;
+      padding: clamp(.85rem, 2.5vw, 1.25rem);
+      border: 2px solid #c5dce8;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #f5fbfe, #fff);
+    }
+    .animation h3 { margin-top: 0; }
+    .animation-intro { color: var(--muted); }
+    .anim-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, .85fr);
+      gap: 1rem;
+      align-items: center;
+    }
+    .anim-drawing {
+      display: grid;
+      min-height: 230px;
+      place-items: center;
+      padding: .65rem;
+      border-radius: 10px;
+      background: var(--wash);
+    }
+    .anim-drawing svg { width: min(100%, 480px); }
+    .anim-copy {
+      padding: 1rem;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgb(24 50 75 / 7%);
+    }
+    .anim-copy h4 { margin: 0 0 .4rem; color: var(--blue); font-size: 1.02rem; }
+    .anim-copy p { margin: .35rem 0; }
+    .anim-copy .math { color: #104f73; font-size: 1.13rem; font-weight: 750; }
+    .step-goal { color: var(--purple); font-size: .91rem; font-weight: 700; }
+    .anim-progress { margin: .6rem 0; color: var(--muted); font-size: .88rem; font-weight: 700; }
+    .anim-controls { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .85rem; }
+    .anim-controls button, .self-check label {
+      padding: .52rem .8rem;
+      border: 1px solid #9ab6c7;
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+    }
+    .anim-controls button { cursor: pointer; }
+    .anim-controls button:hover:not(:disabled), .anim-controls button:focus-visible { background: var(--blue-light); }
+    .anim-controls button:disabled { cursor: not-allowed; opacity: .5; }
+    .anim-step[hidden], .anim-drawing [data-step][hidden] { display: none; }
+    .anim-step:not([hidden]), .anim-drawing [data-step]:not([hidden]) { animation: step-in .24s ease-out; }
+    @keyframes step-in {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .anim-step:not([hidden]), .anim-drawing [data-step]:not([hidden]) { animation: none; }
+    }
+    .derivation-questions {
+      margin-top: .85rem;
+      padding: .85rem 1rem;
+      border: 1px solid #c8dfd0;
+      border-radius: 10px;
+      background: #f2faf5;
+    }
+    .derivation-questions h4 { margin: 0 0 .35rem; color: var(--green); }
+    .question-note {
+      margin: .75rem 0 0;
+      padding: .75rem .9rem;
+      border-left: 4px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      background: var(--purple-light);
+    }
+    .question-note strong { color: var(--purple); }
+    .assembly-task {
+      margin-top: .9rem;
+      padding: .9rem 1rem;
+      border: 1px solid #b9d7e7;
+      border-radius: 10px;
+      background: #f5fbfe;
+    }
+    .assembly-task h4 { margin: 0 0 .35rem; color: var(--blue); }
+    .assembly-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin: .65rem 0; }
+    .assembly-controls button {
+      padding: .5rem .75rem;
+      border: 1px solid #9ab6c7;
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .assembly-controls button:disabled { cursor: default; opacity: .55; }
+    .assembly-task .prism-cell { fill: #fff; stroke: #176b9b; stroke-width: 2; }
+    .assembly-task .prism-cell[data-filled] { fill: #ccebd6; }
+    .assembly-status { min-height: 1.5em; font-weight: 700; }
+    .exercise-set {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #f0d1b7;
+      border-radius: 12px;
+      background: #fffaf5;
+    }
+    .exercise-set h3 { margin-top: 0; color: #844019; }
+    .self-check {
+      margin-top: .9rem;
+      padding: .8rem;
+      border: 1px solid #d5c8e6;
+      border-radius: 9px;
+      background: #faf7ff;
+    }
+    .self-check legend { padding: 0 .3rem; font-weight: 750; }
+    .self-check p { margin-top: 0; }
+    .self-check-options { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .self-check label { display: inline-flex; align-items: center; gap: .4rem; cursor: pointer; }
+    .self-check label:has(input:checked) { border-color: var(--purple); background: var(--purple-light); }
+    .self-check input { accent-color: var(--purple); }
+    .animation svg .edge { fill: none; stroke: #244a67; stroke-width: 2.3; }
+    .animation svg .guide { fill: none; stroke: #52677a; stroke-dasharray: 4 4; stroke-width: 1.7; }
+    .animation svg .accent { fill: none; stroke: #bb5a20; stroke-width: 3; }
+    .animation svg .green { fill: none; stroke: #26704b; stroke-width: 3; }
+    .animation svg .blue-fill { fill: #d9eff9; stroke: #176b9b; stroke-width: 2; }
+    .animation svg .orange-fill { fill: #ffe0bd; stroke: #bb5a20; stroke-width: 2; }
+    .animation svg .green-fill { fill: #ccebd6; stroke: #26704b; stroke-width: 2; }
+    details {
+      margin-top: .65rem;
+      border-top: 1px solid #e9d6c6;
+      padding-top: .55rem;
+    }
+    summary { cursor: pointer; color: #844019; font-weight: 700; }
+    details p { margin: .55rem 0 0; }
+    .small { color: var(--muted); font-size: .92rem; }
+    .center { text-align: center; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .55rem .65rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: var(--wash); }
+    footer { padding: 0 0 2rem; color: var(--muted); font-size: .9rem; }
+
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .anim-layout { grid-template-columns: 1fr; }
+      header { padding-top: 2.5rem; }
+      section { border-radius: 12px; }
+    }
+
+    @media print {
+      :root { background: #fff; }
+      header { padding: 1.4rem 0; background: #fff; color: var(--ink); }
+      .hero, main, footer { width: 100%; }
+      .eyebrow, .hero p:last-of-type, .hero-badges span { color: var(--ink); }
+      .hero-badges span { border-color: var(--line); }
+      nav { position: static; overflow: visible; box-shadow: none; }
+      nav ul { flex-wrap: wrap; width: 100%; }
+      nav a { padding: .2rem .4rem; font-size: .78rem; }
+      main { padding-top: .7rem; }
+      section { break-inside: avoid; margin-bottom: .7rem; padding: 1rem; box-shadow: none; }
+      .figure { min-height: 150px; }
+      .animation { break-inside: avoid; }
+      .anim-controls { display: none; }
+      .anim-step[hidden] { display: block !important; }
+      details > * { display: block; }
+      summary { list-style: none; }
+      footer { padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <p class="eyebrow">Mathematik · Jahrgang 10</p>
+      <h1>Körper berechnen und verstehen</h1>
+      <p>Vom vertrauten Quader zu runden und spitzen Körpern: Wiederhole bekannte Formeln, entdecke neue Körper und leite Volumenformeln Schritt für Schritt her.</p>
+      <div class="hero-badges" aria-label="Lernziele">
+        <span>Formeln verstehen</span><span>Skizzen lesen</span><span>Volumen berechnen</span><span>Einheiten beachten</span>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Inhaltsübersicht">
+    <ul>
+      <li><a href="#start">Wiederholung</a></li>
+      <li><a href="#zylinder">Zylinder</a></li>
+      <li><a href="#kegel">Kegel</a></li>
+      <li><a href="#pyramide">Pyramide</a></li>
+      <li><a href="#stumpf">Pyramidenstumpf</a></li>
+      <li><a href="#kugel">Kugel</a></li>
+      <li><a href="#ueberblick">Formelübersicht</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="start" aria-labelledby="title-start">
+      <h2 id="title-start"><span class="section-number">1</span>Start: Quader und Würfel wiederholen</h2>
+      <p class="lead">Ein Volumen gibt an, wie viel Raum ein Körper einnimmt. Es wird in Kubikeinheiten angegeben, zum Beispiel cm³ oder m³. Die Oberfläche ist die Summe der Flächen aller Seiten.</p>
+      <div class="grid">
+        <article class="panel">
+          <h3>Quader</h3>
+          <div class="figure">
+            <svg viewBox="0 0 330 205" role="img" aria-labelledby="cuboid-title cuboid-desc">
+              <title id="cuboid-title">Quader mit Länge, Breite und Höhe</title>
+              <desc id="cuboid-desc">Ein räumlicher Quader. Die Kanten sind mit a, b und c beschriftet.</desc>
+              <path class="shape" d="M65 65 L205 65 L205 155 L65 155 Z"/>
+              <path class="shape" d="M65 65 L105 35 L245 35 L205 65 M205 65 L245 35 L245 125 L205 155 M205 155 L245 125"/>
+              <path class="hidden" d="M65 155 L105 125 L245 125 M105 35 L105 125"/>
+              <text x="125" y="176">a</text><text x="222" y="148">b</text><text x="49" y="113">c</text>
+            </svg>
+          </div>
+          <p>Grundfläche <strong>G = a · b</strong>; Höhe <strong>c</strong>.</p>
+          <div class="formula">V = a · b · c = G · c</div>
+          <div class="formula">O = 2(ab + ac + bc)</div>
+        </article>
+        <article class="panel">
+          <h3>Würfel</h3>
+          <div class="figure">
+            <svg viewBox="0 0 330 205" role="img" aria-labelledby="cube-title cube-desc">
+              <title id="cube-title">Würfel mit Kantenlänge a</title>
+              <desc id="cube-desc">Ein Würfel mit gleich langen Kanten, die Kantenlänge a ist markiert.</desc>
+              <path class="shape" d="M80 60 L190 60 L190 170 L80 170 Z"/>
+              <path class="shape" d="M80 60 L120 25 L230 25 L190 60 M190 60 L230 25 L230 135 L190 170 M190 170 L230 135"/>
+              <path class="hidden" d="M80 170 L120 135 L230 135 M120 25 L120 135"/>
+              <text x="126" y="192">a</text><text x="207" y="151">a</text>
+            </svg>
+          </div>
+          <p>Alle Kanten sind gleich lang; sechs gleiche quadratische Seitenflächen.</p>
+          <div class="formula">V = a³</div>
+          <div class="formula">O = 6a²</div>
+        </article>
+      </div>
+      <div class="tasks">
+        <h3>Verständnis-Check</h3>
+        <ol>
+          <li>Ein Quader ist 8 cm lang, 3 cm breit und 5 cm hoch. Berechne Volumen und Oberfläche.</li>
+          <li>Ein Würfel hat die Kantenlänge 4 cm. Berechne sein Volumen und seine Oberfläche.</li>
+        </ol>
+        <details><summary>Lösungen anzeigen</summary>
+          <p><strong>1.</strong> V = 8 · 3 · 5 = <strong>120 cm³</strong>; O = 2(24 + 40 + 15) = <strong>158 cm²</strong>.</p>
+          <p><strong>2.</strong> V = 4³ = <strong>64 cm³</strong>; O = 6 · 4² = <strong>96 cm²</strong>.</p>
+        </details>
+        <fieldset class="self-check"><legend>Meine Einschätzung</legend><p>Wie sicher fühlst du dich mit den wiederholten Formeln?</p><div class="self-check-options"><label><input type="radio" name="selbst-start" value="fragen"> Ich habe noch Fragen.</label><label><input type="radio" name="selbst-start" value="verstanden"> Ich habe den Inhalt gut verstanden.</label></div></fieldset>
+        <p class="question-note"><strong>Bei Fragen:</strong> Notiere sie in deinem Heft, um sie mit deiner Mitschülerin oder deinem Mitschüler und der Lehrkraft zu besprechen. Fragen sind positiv!</p>
+      </div>
+    </section>
+
+    <section id="zylinder" aria-labelledby="title-zylinder">
+      <h2 id="title-zylinder"><span class="section-number">2</span>Kreiszylinder</h2>
+      <div class="grid">
+        <article class="panel">
+          <h3>So ist der Zylinder aufgebaut</h3>
+          <div class="figure">
+            <svg viewBox="0 0 330 240" role="img" aria-labelledby="cyl-title cyl-desc">
+              <title id="cyl-title">Kreiszylinder mit Radius r und Höhe h</title>
+              <desc id="cyl-desc">Zwei parallele Kreisflächen sind durch eine gekrümmte Mantelfläche verbunden. Radius r und Höhe h sind eingezeichnet.</desc>
+              <path class="shape" d="M88 55 C88 32 228 32 228 55 L228 177 C228 200 88 200 88 177 Z"/>
+              <ellipse class="shape" cx="158" cy="55" rx="70" ry="23"/>
+              <path class="edge" d="M88 55 L88 177 M228 55 L228 177"/>
+              <path class="hidden" d="M88 177 C88 154 228 154 228 177"/>
+              <path class="edge" d="M158 55 L218 55"/>
+              <text x="183" y="48">r</text><text x="238" y="122">h</text>
+            </svg>
+          </div>
+          <p>Zwei gleich große, parallele Kreisflächen sind durch eine gekrümmte Mantelfläche verbunden. <strong>r</strong> ist der Grundkreisradius, <strong>h</strong> der senkrechte Abstand der Grundflächen.</p>
+          <div class="formula">G = πr²</div>
+          <div class="formula">V = G · h = πr²h</div>
+          <p>Der <strong>Mantel</strong> ist die gekrümmte Seitenfläche ohne Deck- und Grundkreis. Beim Abwickeln wird er zu einem Rechteck mit den Seiten <strong>h</strong> und dem Grundkreisumfang <strong>2πr</strong>. Daher gilt <strong>M = 2πrh</strong>. Für die ganze Oberfläche kommen beide Kreisflächen dazu: <strong>O = 2πr² + M = 2πr² + 2πrh</strong>.</p>
+          <p class="note"><strong>Merke:</strong> Der Durchmesser ist d = 2r. Setze für π, falls nicht anders verlangt, π ≈ 3,14 ein.</p>
+        </article>
+        <div class="tasks">
+          <h3>Verständnis-Check</h3>
+          <ol>
+            <li>Ein Zylinder hat r = 3 cm und h = 8 cm. Berechne sein Volumen exakt mit π und näherungsweise.</li>
+            <li>Ein zylindrisches Gefäß hat Durchmesser 10 cm und Höhe 12 cm. Welchen Radius verwendest du für die Rechnung?</li>
+            <li>Ein Zylinder hat r = 4 cm und h = 5 cm. Berechne sein Volumen und seine Mantelfläche exakt.</li>
+            <li>Ein Zylinder hat Durchmesser 8 cm und Höhe 10 cm. Berechne seine Oberfläche exakt.</li>
+          </ol>
+          <details><summary>Lösungen anzeigen</summary>
+            <p><strong>1.</strong> V = π · 3² · 8 = <strong>72π cm³ ≈ 226,2 cm³</strong>.</p>
+            <p><strong>2.</strong> r = d/2 = 10/2 = <strong>5 cm</strong>.</p>
+            <p><strong>3.</strong> V = π · 4² · 5 = <strong>80π cm³</strong>; M = 2π · 4 · 5 = <strong>40π cm²</strong>.</p>
+            <p><strong>4.</strong> r = 4 cm; O = 2π · 4² + 2π · 4 · 10 = <strong>112π cm²</strong>.</p>
+          </details>
+          <fieldset class="self-check"><legend>Meine Einschätzung</legend><p>Wie sicher fühlst du dich mit Füllversuch, Mantel und Rechnungen?</p><div class="self-check-options"><label><input type="radio" name="selbst-zylinder" value="fragen"> Ich habe noch Fragen.</label><label><input type="radio" name="selbst-zylinder" value="verstanden"> Ich habe den Inhalt gut verstanden.</label></div></fieldset>
+          <p class="question-note"><strong>Bei Fragen:</strong> Notiere sie in deinem Heft, um sie mit deiner Mitschülerin oder deinem Mitschüler und der Lehrkraft zu besprechen. Fragen sind positiv!</p>
+        </div>
+      </div>
+      <article class="animation" data-animation="zylinder" aria-labelledby="zylinder-animation-title">
+        <h3 id="zylinder-animation-title">Animation: Drei Kegelfüllungen im Zylinder</h3>
+        <p class="learning-goal"><strong>Lernziel:</strong> Ich kann den Zusammenhang zwischen Zylinder- und Kegelvolumen erklären und die Mantelfläche des Zylinders aus seinem Netz bestimmen.</p>
+        <p class="animation-intro">Jede Füllung stammt aus einem Kegel mit derselben Grundfläche G und Höhe h wie der Zylinder. Klicke dich Schritt für Schritt durch den Füllversuch.</p>
+        <div class="anim-layout">
+          <div class="anim-drawing">
+            <svg viewBox="0 0 440 230" role="img" aria-labelledby="cylinder-animation-title cylinder-animation-desc">
+              <title id="cylinder-animation-title">Füllvergleich und Netz des Zylinders</title>
+              <desc id="cylinder-animation-desc">Die ersten vier Ansichten zeigen drei gleiche Kegelfüllungen, die das Zylindervolumen füllen. Die letzten Ansichten leiten Mantel- und Oberflächenformel aus dem abgewickelten Zylindernetz her.</desc>
+              <g data-step="0">
+                <path class="edge" d="M205 48 C205 34 305 34 305 48 L305 184 C305 198 205 198 205 184 Z"/><ellipse class="edge" cx="255" cy="48" rx="50" ry="14"/><path class="hidden" d="M205 184 C205 170 305 170 305 184"/>
+                <path class="orange-fill" d="M80 52 L52 106 C52 117 108 117 108 106 Z M137 52 L109 106 C109 117 165 117 165 106 Z M194 52 L166 106 C166 117 222 117 222 106 Z"/>
+                <text x="66" y="134">1</text><text x="123" y="134">2</text><text x="180" y="134">3</text>
+                <text x="223" y="218">Zylinder: Grundfläche G, Höhe h</text><text x="45" y="166">Drei gleiche Kegelfüllungen</text>
+              </g>
+              <g data-step="1" hidden>
+                <path class="blue-fill" d="M205 138 L305 138 L305 184 C305 198 205 198 205 184 Z"/>
+                <path class="edge" d="M205 48 C205 34 305 34 305 48 L305 184 C305 198 205 198 205 184 Z"/><ellipse class="edge" cx="255" cy="48" rx="50" ry="14"/>
+                <path class="orange-fill" d="M80 52 L52 106 C52 117 108 117 108 106 Z"/>
+                <text x="215" y="171">⅓ des Volumens</text><text x="54" y="141">Füllung 1</text><text x="220" y="218">gleiche Grundfläche G</text>
+              </g>
+              <g data-step="2" hidden>
+                <path class="blue-fill" d="M205 92 L305 92 L305 184 C305 198 205 198 205 184 Z"/>
+                <path class="edge" d="M205 48 C205 34 305 34 305 48 L305 184 C305 198 205 198 205 184 Z"/><ellipse class="edge" cx="255" cy="48" rx="50" ry="14"/>
+                <path class="orange-fill" d="M80 52 L52 106 C52 117 108 117 108 106 Z M137 52 L109 106 C109 117 165 117 165 106 Z"/>
+                <text x="215" y="124">⅔ des Volumens</text><text x="48" y="141">Füllung 1 + 2</text><text x="220" y="218">gleiche Höhe h</text>
+              </g>
+              <g data-step="3" hidden>
+                <path class="blue-fill" d="M205 48 L305 48 L305 184 C305 198 205 198 205 184 Z"/>
+                <path class="edge" d="M205 48 C205 34 305 34 305 48 L305 184 C305 198 205 198 205 184 Z"/><ellipse class="edge" cx="255" cy="48" rx="50" ry="14"/>
+                <path class="orange-fill" d="M80 52 L52 106 C52 117 108 117 108 106 Z M137 52 L109 106 C109 117 165 117 165 106 Z M194 52 L166 106 C166 117 222 117 222 106 Z"/>
+                <text x="221" y="118">voll</text><text x="45" y="141">3 Füllungen</text><text x="211" y="218">Volumenverhältnis 3 : 1</text>
+              </g>
+              <g data-step="4" hidden>
+                <text x="38" y="40">Zylinder: Radius r, Höhe h</text>
+                <circle class="blue-fill" cx="85" cy="113" r="40"/>
+                <path class="accent" d="M85 113 L123 113"/>
+                <text x="96" y="106">r</text><text x="45" y="170">Grundkreis</text>
+                <rect class="blue-fill" x="175" y="62" width="215" height="105"/>
+                <path class="edge" d="M175 62 L390 62 L390 167 L175 167 Z"/>
+                <path class="accent" d="M175 48 L390 48 M159 62 L159 167"/>
+                <text x="235" y="43">Umfang 2πr</text><text x="137" y="121">h</text>
+                <text x="203" y="112">Mantelrechteck</text>
+              </g>
+              <g data-step="5" hidden>
+                <circle class="blue-fill" cx="85" cy="105" r="35"/>
+                <circle class="blue-fill" cx="355" cy="105" r="35"/>
+                <rect class="blue-fill" x="135" y="70" width="170" height="70"/>
+                <path class="edge" d="M135 70 L305 70 L305 140 L135 140 Z"/>
+                <path class="accent" d="M135 56 L305 56 M119 70 L119 140"/>
+                <text x="177" y="51">2πr</text><text x="97" y="112">r</text><text x="277" y="112">r</text>
+                <text x="188" y="111">M = 2πr · h</text><text x="102" y="183">2 Grundkreise</text>
+                <text x="168" y="198">O = M + 2πr²</text><text x="300" y="166">h</text>
+              </g>
+            </svg>
+          </div>
+          <div class="anim-copy" aria-live="polite" data-live>
+            <div class="anim-step" data-step="0"><h4>1. Passende Körper bereitstellen</h4><p>Die drei Kegel haben jeweils dieselbe Grundfläche G und dieselbe senkrechte Höhe h wie der Zylinder. Deshalb sind ihre Füllmengen gleich groß.</p></div>
+            <div class="anim-step" data-step="1" hidden><h4>2. Erste Kegelfüllung</h4><p>Eine Kegelfüllung füllt ein Drittel der Zylinderhöhe, weil der Zylinder überall denselben Querschnitt G hat.</p></div>
+            <div class="anim-step" data-step="2" hidden><h4>3. Zweite Kegelfüllung</h4><p>Nach zwei Füllungen ist der Zylinder zu zwei Dritteln gefüllt. Eine weitere gleiche Füllung passt noch hinein.</p></div>
+            <div class="anim-step" data-step="3" hidden><h4>4. Dritte Kegelfüllung</h4><p>Drei Kegelfüllungen füllen den Zylinder genau. Daher ist das Kegelvolumen ein Drittel des Zylindervolumens.</p><p class="math">V<sub>Kegel</sub> = ⅓Gh = ⅓πr²h</p></div>
+            <div class="anim-step" data-step="4" hidden><h4>5. Mantel zum Rechteck abwickeln</h4><p>Schneide den Mantel entlang einer senkrechten Mantellinie auf und rolle ihn flach aus. Die Rechteckhöhe ist h; seine Breite ist genau ein Umlauf des Grundkreises, also 2πr.</p><p class="math">M = Rechtecksfläche = h · 2πr</p></div>
+            <div class="anim-step" data-step="5" hidden><h4>6. Oberfläche zusammensetzen</h4><p>Die Mantelfläche M ist nur die Seitenfläche. Im Netz kommen zwei Kreisflächen mit je G = πr² dazu. Die Kegelmantellinie s wird für den Zylinder nicht gebraucht.</p><p class="math">O = M + 2G = 2πrh + 2πr²</p></div>
+            <div class="anim-progress" data-progress></div>
+            <div class="anim-controls"><button type="button" data-previous>Zurück</button><button type="button" data-next>Weiter</button><button type="button" data-replay>Von vorn</button></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="kegel" aria-labelledby="title-kegel">
+      <h2 id="title-kegel"><span class="section-number">3</span>Kreiskegel</h2>
+      <div class="grid">
+        <article class="panel">
+          <h3>Bestandteile des Kegels</h3>
+          <div class="figure">
+            <svg viewBox="0 0 340 250" role="img" aria-labelledby="cone-title cone-desc">
+              <title id="cone-title">Kreiskegel mit Radius r, Höhe h und Mantellinie s</title>
+              <desc id="cone-desc">Ein Kegel mit kreisförmiger Grundfläche. Die senkrechte Höhe h verläuft von der Spitze zum Mittelpunkt der Grundfläche. Die Mantellinie s verläuft zur Kreislinie.</desc>
+              <path class="shape-alt" d="M170 32 L75 190 C75 218 265 218 265 190 Z"/>
+              <path class="edge" d="M170 32 L75 190 M170 32 L265 190"/>
+              <path class="edge" d="M75 190 C75 162 265 162 265 190"/>
+              <path class="hidden" d="M75 190 C75 218 265 218 265 190"/>
+              <path class="guide" d="M170 32 L170 190"/>
+              <path class="edge" d="M170 190 L252 190"/>
+              <text x="176" y="116">h</text><text x="207" y="175">s</text><text x="210" y="211">r</text>
+            </svg>
+          </div>
+          <p>Der Kreiskegel hat eine Kreisfläche als Grundfläche und eine Spitze. Die <strong>Höhe h</strong> steht senkrecht auf der Grundfläche; die schräge Seitenlinie heißt <strong>Mantellinie s</strong>.</p>
+          <div class="formula">G = πr²</div>
+          <div class="formula">V = ⅓πr²h</div>
+          <p>Mit dem Satz des Pythagoras gilt <strong>s = √(r² + h²)</strong>. Mantelfläche: <strong>M = πrs</strong>; Oberfläche: <strong>O = πr² + πrs</strong>.</p>
+        </article>
+        <article class="panel">
+          <h3>Herleitung der Volumenformel</h3>
+          <div class="figure">
+            <svg viewBox="0 0 450 245" role="img" aria-labelledby="cone-proof-title cone-proof-desc">
+              <title id="cone-proof-title">Zylinder und Kegel mit gleicher Grundfläche und Höhe</title>
+              <desc id="cone-proof-desc">Links ein Zylinder, rechts ein Kegel. Beide haben Grundkreisradius r und Höhe h. Drei gleiche Kegelvolumina füllen den Zylinder.</desc>
+              <path class="fill-blue" d="M54 56 C54 39 145 39 145 56 L145 183 C145 200 54 200 54 183 Z"/>
+              <ellipse class="fill-blue" cx="99.5" cy="56" rx="45.5" ry="15"/>
+              <path class="hidden" d="M54 183 C54 166 145 166 145 183"/>
+              <path class="fill-orange" d="M319 48 L266 183 C266 200 372 200 372 183 Z"/>
+              <path class="edge" d="M319 48 L266 183 M319 48 L372 183"/>
+              <path class="edge" d="M266 183 C266 166 372 166 372 183"/>
+              <path class="hidden" d="M266 183 C266 200 372 200 372 183"/>
+              <path class="guide" d="M54 56 L54 183 M145 56 L145 183"/>
+              <path class="guide" d="M319 48 L319 183"/>
+              <path class="edge" d="M99 56 L140 56 M319 183 L363 183"/>
+              <text x="81" y="222">Zylinder: V = Gh</text>
+              <text x="259" y="222">Kegel: V = ?</text>
+              <text x="110" y="51">r</text><text x="149" y="125">h</text>
+              <text x="333" y="178">r</text><text x="326" y="123">h</text>
+            </svg>
+          </div>
+          <div class="derivation">
+            <h3>Vergleichen und folgern</h3>
+            <ol class="steps">
+              <li>Ein Kegel und ein Zylinder haben denselben Grundkreis (Fläche G) und dieselbe Höhe h.</li>
+              <li>Füllt man den Zylinder mit Wasser aus dem Kegel, braucht man genau drei Kegelfüllungen.</li>
+              <li>Also ist das Kegelvolumen ein Drittel des Zylindervolumens.</li>
+            </ol>
+            <p class="center"><strong>V<sub>Kegel</sub> = ⅓ · V<sub>Zylinder</sub> = ⅓ · G · h = ⅓πr²h</strong></p>
+          </div>
+          <p class="small">Das gilt für jeden geraden Kreiskegel: Bei gleicher Grundfläche und Höhe nimmt er ein Drittel des Zylindervolumens ein.</p>
+        </article>
+      </div>
+      <article class="animation" data-animation="kegel" aria-labelledby="kegel-animation-title">
+        <h3 id="kegel-animation-title">Entdeckanimation: Volumen und Oberfläche</h3>
+        <p class="learning-goal"><strong>Lernziel:</strong> Ich kann erklären, warum das Kegelvolumen ein Drittel von Grundfläche mal Höhe ist und wie das Abwickeln der Mantelfläche zur Oberflächenformel führt.</p>
+        <p class="animation-intro">Nutze „Weiter“, um jeweils einen Gedanken sichtbar zu machen. Lies zuerst die Zeichnung und erkläre den Schritt mit eigenen Worten.</p>
+        <div class="anim-layout">
+          <div class="anim-drawing">
+            <svg viewBox="0 0 440 230" role="img" aria-label="Schrittweise Skizzen zur Herleitung von Kegelvolumen und Kegeloberfläche">
+              <g data-step="0">
+                <path class="blue-fill" d="M45 65 C45 48 135 48 135 65 L135 165 C135 182 45 182 45 165 Z"/><ellipse class="blue-fill" cx="90" cy="65" rx="45" ry="15"/>
+                <path class="orange-fill" d="M315 55 L265 165 C265 182 365 182 365 165 Z"/><path class="edge" d="M315 55 L265 165 M315 55 L365 165 M265 165 C265 148 365 148 365 165"/>
+                <text x="47" y="207">Zylinder</text><text x="278" y="207">Kegel</text><text x="145" y="110">gleiche G und h</text>
+              </g>
+              <g data-step="1" hidden>
+                <circle class="blue-fill" cx="215" cy="115" r="73"/><path class="accent" d="M215 115 L285 115"/><text x="244" y="105">r</text><text x="154" y="212">Grundfläche: G = πr²</text>
+              </g>
+              <g data-step="2" hidden>
+                <rect class="blue-fill" x="45" y="50" width="130" height="120" rx="25"/><path class="edge" d="M45 50 C45 30 175 30 175 50 M45 170 C45 190 175 190 175 170"/><path class="guide" d="M45 50 L45 170 M175 50 L175 170"/>
+                <path class="orange-fill" d="M275 50 L230 170 L320 170 Z"/><path class="accent" d="M210 50 L210 170"/><text x="182" y="116">h</text>
+                <text x="68" y="213">Zylindervolumen = G · h</text><text x="259" y="213">3 Kegel füllen 1 Zylinder</text>
+              </g>
+              <g data-step="3" hidden>
+                <rect class="blue-fill" x="80" y="55" width="280" height="110" rx="10"/><text x="106" y="103">Kegelvolumen = Zylindervolumen ÷ 3</text><text x="113" y="142">= ⅓ · G · h = ⅓πr²h</text>
+              </g>
+              <g data-step="4" hidden>
+                <path class="orange-fill" d="M76 178 L76 58 L226 178 Z"/>
+                <path class="edge" d="M76 178 L76 58 M76 178 L226 178 M76 58 L226 178"/>
+                <path class="guide" d="M76 58 L76 178 L226 178"/>
+                <text x="43" y="120">h</text><text x="139" y="197">r</text><text x="151" y="111">s</text>
+                <text x="252" y="89">rechtwinkliges Dreieck</text><text x="252" y="128">Pythagoras:</text><text x="252" y="169">s² = h² + r²</text><text x="252" y="204">s = √(h² + r²)</text>
+              </g>
+              <g data-step="5" hidden>
+                <circle class="blue-fill" cx="105" cy="112" r="45"/><path class="orange-fill" d="M275 112 L220 45 A87 87 0 0 1 359 112 Z"/><path class="edge" d="M275 112 L220 45 M275 112 L359 112"/>
+                <text x="69" y="185">Grundkreis</text><text x="252" y="185">Mantelsektor</text><text x="212" y="215">Sektorbogenlänge = 2πr</text><text x="286" y="103">s</text>
+              </g>
+              <g data-step="6" hidden>
+                <rect class="orange-fill" x="48" y="52" width="155" height="126" rx="12"/><rect class="blue-fill" x="238" y="52" width="155" height="126" rx="12"/><text x="70" y="105">M = ½ · 2πr · s</text><text x="93" y="144">= πrs</text><text x="257" y="104">O = G + M</text><text x="259" y="145">= πr² + πrs</text>
+              </g>
+            </svg>
+          </div>
+          <div class="anim-copy" aria-live="polite" data-live>
+            <div class="anim-step" data-step="0"><h4>1. Gemeinsam vergleichen</h4><p>Stelle einen Kegel und einen Zylinder mit gleichem Grundkreis und gleicher senkrechter Höhe gegenüber.</p></div>
+            <div class="anim-step" data-step="1" hidden><h4>2. Grundfläche bestimmen</h4><p>Die Grundfläche ist ein Kreis mit Radius r.</p><p class="math">G = πr²</p></div>
+            <div class="anim-step" data-step="2" hidden><h4>3. Volumen entdecken</h4><p>Drei gleich große Kegelfüllungen füllen den passenden Zylinder. Dessen Volumen ist Grundfläche mal Höhe.</p><p class="math">V<sub>Zylinder</sub> = G · h</p></div>
+            <div class="anim-step" data-step="3" hidden><h4>4. Kegelformel folgern</h4><p>Der Kegel nimmt ein Drittel des Zylindervolumens ein. Setze G = πr² ein.</p><p class="math">V = ⅓Gh = ⅓πr²h</p></div>
+            <div class="anim-step" data-step="4" hidden><h4>5. Mantellinie s bestimmen</h4><p>Ein senkrechter Schnitt durch die Kegelspitze und den Grundkreismittelpunkt bildet ein rechtwinkliges Dreieck. Seine Katheten sind h und r; die Hypotenuse ist s.</p><p class="math">s² = h² + r² &nbsp;⇒&nbsp; s = √(h² + r²)</p></div>
+            <div class="anim-step" data-step="5" hidden><h4>6. Mantel abwickeln</h4><p>Der Mantel wird zu einem Kreissektor. Seine Bogenlänge ist genauso lang wie der Grundkreisumfang 2πr; der Sektorradius ist die zuvor bestimmte Mantellinie s.</p><p class="math">M = ½ · 2πr · s = πrs</p></div>
+            <div class="anim-step" data-step="6" hidden><h4>7. Oberfläche zusammensetzen</h4><p>Zur Mantelfläche kommt die Kreisgrundfläche G = πr² hinzu.</p><p class="math">O = G + M = πr² + πrs</p></div>
+            <div class="anim-progress" data-progress></div>
+            <div class="anim-controls"><button type="button" data-previous>Zurück</button><button type="button" data-next>Weiter</button><button type="button" data-replay>Von vorn</button></div>
+          </div>
+        </div>
+        <div class="derivation-questions"><h4>Fragen zur Herleitung</h4><ol><li>Welche zwei Größen müssen bei Zylinder und Kegel gleich sein, damit der Vergleich funktioniert?</li><li>Warum kommt in der Volumenformel die senkrechte Höhe h vor, in der Mantelformel aber die Mantellinie s?</li><li>Wie wird aus der Bogenlänge 2πr und dem Sektorradius s die Mantelfläche?</li></ol><details><summary>Lösungsideen anzeigen</summary><ol><li>Beide müssen dieselbe Grundfläche G und dieselbe senkrechte Höhe h haben.</li><li>Das Volumen hängt vom Abstand senkrecht zur Grundfläche ab. Die Mantelfläche liegt auf der schrägen Seitenfläche; beim aufgeklappten Sektor ist s der Radius.</li><li>Die Sektorfläche ist die Hälfte aus Bogenlänge mal Radius: M = ½ · 2πr · s = πrs. Zur Oberfläche kommt die Grundfläche G = πr² hinzu.</li></ol></details><p class="question-note"><strong>Bei Fragen:</strong> Notiere sie in deinem Heft, um sie mit deiner Mitschülerin oder deinem Mitschüler und der Lehrkraft zu besprechen. Fragen sind positiv!</p></div>
+      </article>
+      <aside class="source-links" aria-label="Weiterführende Videos zum Kegel">
+        <h3>Weiterlernen: Kegel</h3>
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=xZ2yF3HTr4s" target="_blank" rel="noopener noreferrer">Kegel – Volumen, Mantelfläche und Oberfläche (YouTube)</a></li>
+          <li><a href="https://www.youtube.com/watch?v=BdJ1RkBV3qQ" target="_blank" rel="noopener noreferrer">Mathe 9b – Kegel: Herleitung der Mantelflächenformel (YouTube)</a></li>
+        </ul>
+        <p class="source-note">Die Videos öffnen eine externe Plattform. Die interaktive Herleitung und die Skizzen auf dieser Seite bleiben die verbindliche Grundlage.</p>
+      </aside>
+      <div class="tasks">
+        <h3>Übungen: Volumen und Oberfläche</h3>
+        <ol>
+          <li>Ein Kegel hat r = 3 cm und h = 8 cm. Berechne V exakt und näherungsweise.</li>
+          <li>Ein Kegel hat r = 5 cm und Mantellinie s = 13 cm. Berechne M und O exakt.</li>
+          <li>Ein Kegel hat r = 6 cm und h = 8 cm. Berechne zuerst s, dann M und O.</li>
+          <li>Ein Kegel hat V = 100π cm³ und r = 5 cm. Bestimme die Höhe h.</li>
+        </ol>
+        <details><summary>Lösungen anzeigen</summary>
+          <p><strong>1.</strong> V = ⅓π · 3² · 8 = <strong>24π cm³ ≈ 75,4 cm³</strong>.</p>
+          <p><strong>2.</strong> M = π · 5 · 13 = 65π cm²; O = 25π + 65π = <strong>90π cm²</strong>.</p>
+          <p><strong>3.</strong> s = √(6² + 8²) = 10 cm; M = 60π cm²; O = 36π + 60π = <strong>96π cm²</strong>.</p>
+          <p><strong>4.</strong> 100π = ⅓π · 25 · h, also <strong>h = 12 cm</strong>.</p>
+        </details>
+        <fieldset class="self-check"><legend>Meine Einschätzung</legend><p>Wie sicher fühlst du dich mit der Herleitung und den Rechnungen?</p><div class="self-check-options"><label><input type="radio" name="selbst-kegel" value="fragen"> Ich habe noch Fragen.</label><label><input type="radio" name="selbst-kegel" value="verstanden"> Ich habe den Inhalt gut verstanden.</label></div></fieldset>
+      </div>
+    </section>
+
+    <section id="pyramide" aria-labelledby="title-pyramide">
+      <h2 id="title-pyramide"><span class="section-number">4</span>Pyramide</h2>
+      <div class="grid">
+        <article class="panel">
+          <h3>Merkmale und Formeln</h3>
+          <div class="figure">
+            <svg viewBox="0 0 340 245" role="img" aria-labelledby="pyr-title pyr-desc">
+              <title id="pyr-title">Viereckige Pyramide mit Grundkante a und Höhe h</title>
+              <desc id="pyr-desc">Eine Pyramide mit quadratischer Grundfläche. Die Höhe h verläuft senkrecht von der Spitze zum Mittelpunkt der Grundfläche.</desc>
+              <path class="shape" d="M75 164 L190 164 L244 195 L128 195 Z"/>
+              <path class="shape-alt" d="M161 34 L75 164 L190 164 L244 195 Z"/>
+              <path class="edge" d="M161 34 L75 164 M161 34 L190 164 M161 34 L244 195"/>
+              <path class="hidden" d="M161 34 L128 195 M75 164 L128 195"/>
+              <path class="guide" d="M161 34 L161 177"/>
+              <path class="edge" d="M161 177 L190 164"/>
+              <text x="167" y="110">h</text><text x="117" y="216">a</text><text x="177" y="157">G</text>
+            </svg>
+          </div>
+          <p>Eine Pyramide hat eine polygonale Grundfläche. Die Seitenflächen sind Dreiecke, die sich in einer Spitze treffen. Die Höhe <strong>h</strong> ist der senkrechte Abstand der Spitze von der Grundfläche.</p>
+          <p>Für eine quadratische Grundfläche gilt <strong>G = a²</strong>. Allgemein ist G der Flächeninhalt des jeweiligen Grundpolygons.</p>
+          <div class="formula">V = ⅓Gh</div>
+          <p>Die Oberfläche besteht aus der Grundfläche und allen dreieckigen Seitenflächen: <strong>O = G + M</strong>. Für eine <strong>regelmäßige Pyramide</strong> sind alle Seiten-Dreiecke gleich hoch. Bezeichne ihre gemeinsame Seitenhöhe mit <strong>l</strong> und den Grundflächenumfang mit <strong>p</strong>. Dann ist <strong>M = ½pl</strong>; bei nicht regelmäßigen Pyramiden müssen die einzelnen Dreiecksflächen addiert werden.</p>
+        </article>
+        <article class="panel">
+          <h3>Herleitung: Pyramide im Prisma</h3>
+          <div class="figure">
+            <svg viewBox="0 0 450 248" role="img" aria-labelledby="prism-title prism-desc">
+              <title id="prism-title">Dreiecksprisma mit eingezeichneten Teilungskanten</title>
+              <desc id="prism-desc">Die Eckpunkte A, B, C und A-Strich, B-Strich, C-Strich bilden ein Dreiecksprisma. Die inneren Kanten teilen es in die Tetraeder ABCA-Strich, BCA-StrichB-Strich und CA-StrichB-StrichC-Strich.</desc>
+              <path class="fill-blue" d="M42 151 L145 151 L91 69 Z M112 194 L215 194 L161 112 Z"/>
+              <path class="edge" d="M42 151 L112 194 M145 151 L215 194 M91 69 L161 112 M42 151 L145 151 L91 69 Z M112 194 L215 194 L161 112 Z"/>
+              <path class="accent" d="M112 194 L145 151 M112 194 L91 69 M145 151 L161 112"/>
+              <path class="green" d="M91 69 L215 194"/>
+              <circle cx="42" cy="151" r="3" fill="#18324b"/><circle cx="145" cy="151" r="3" fill="#18324b"/><circle cx="91" cy="69" r="3" fill="#18324b"/>
+              <circle cx="112" cy="194" r="3" fill="#18324b"/><circle cx="215" cy="194" r="3" fill="#18324b"/><circle cx="161" cy="112" r="3" fill="#18324b"/>
+              <text x="27" y="168">A</text><text x="147" y="169">B</text><text x="77" y="65">C</text>
+              <text x="97" y="216">A′</text><text x="219" y="210">B′</text><text x="164" y="108">C′</text>
+              <text x="258" y="82">T₁ = ABCA′</text><text x="258" y="112">T₂ = BCA′B′</text><text x="258" y="142">T₃ = CA′B′C′</text>
+              <text x="258" y="184">Prisma: Grundfläche G,</text><text x="258" y="210">Länge h</text>
+            </svg>
+            <figcaption>A, B, C und A′, B′, C′ sind die beiden Dreiecksflächen des Prismas. T₁, T₂, T₃ benennen die drei Teilkörper. Die Skizze zeigt die Zerlegung, nicht ein Gleichheitsargument für die Teilvolumen.</figcaption>
+          </div>
+          <div class="derivation">
+            <h3>Volumen untersuchen: Prisma und Pyramide</h3>
+            <ol class="steps">
+              <li>Vergleiche Pyramide und Prisma mit derselben Grundfläche G und derselben senkrechten Höhe h.</li>
+              <li>Ein Füllversuch mit drei Pyramidenfüllungen zeigt: Zusammen füllen sie das Prisma.</li>
+              <li>Eine Pyramide hat daher ein Drittel des Prismenvolumens: V = ⅓Gh.</li>
+            </ol>
+            <p class="center"><strong>V<sub>Prisma</sub> = Gh &nbsp;⇒&nbsp; V<sub>Pyramide</sub> = ⅓Gh</strong></p>
+          </div>
+          <p class="small">Die Skizze zeigt eine mögliche Zerlegung eines Dreiecksprismas in Tetraeder. Sie veranschaulicht die Körper, beweist aber nicht von selbst, dass die Teilvolumina gleich sind. Der Drittelfaktor wird hier durch den Füllversuch entdeckt; für allgemeine Grundflächen wird die Grundfläche in Dreiecke zerlegt und die Teilvolumina werden addiert.</p>
+        </article>
+      </div>
+      <article class="animation" data-animation="pyramide" aria-labelledby="pyramide-animation-title">
+        <h3 id="pyramide-animation-title">Entdeckanimation: Volumen und Oberfläche</h3>
+        <p class="learning-goal"><strong>Lernziel:</strong> Ich kann die Pyramidenformel aus dem Vergleich mit einem Prisma erklären und die Oberfläche aus Grundfläche und aufgeklappten Dreiecksseiten zusammensetzen.</p>
+        <p class="animation-intro">Gehe die Schritte nacheinander durch. Achte darauf, welche Flächen zur Grundfläche und welche zum Mantel gehören.</p>
+        <div class="anim-layout">
+          <div class="anim-drawing">
+            <svg viewBox="0 0 440 230" role="img" aria-labelledby="pyramide-animation-svg-title pyramide-animation-svg-desc">
+              <title id="pyramide-animation-svg-title">Volumenvergleich und Netz einer regelmäßigen Pyramide</title>
+              <desc id="pyramide-animation-svg-desc">Die ersten Ansichten vergleichen drei Pyramidenfüllungen mit einem Prisma. Die letzte Ansicht zeigt das Netz einer regelmäßigen quadratischen Pyramide mit Grundkante a und senkrechter Seitenhöhe l.</desc>
+              <g data-step="0">
+                <path class="blue-fill" d="M35 145 L120 145 L160 174 L75 174 Z M35 55 L120 55 L120 145 L35 145 Z M120 55 L160 84 L160 174 L120 145 Z"/>
+                <path class="orange-fill" d="M276 54 L227 148 L328 148 Z"/><path class="edge" d="M276 54 L227 148 M276 54 L328 148"/>
+                <text x="52" y="207">Prisma: V = G · h</text><text x="245" y="207">Pyramide</text><text x="52" y="226">G = Grundfläche, h = senkrechte Höhe</text>
+              </g>
+              <g data-step="1" hidden>
+                <path class="blue-fill" d="M42 151 L145 151 L91 69 Z M112 194 L215 194 L161 112 Z"/>
+                <path class="edge" d="M42 151 L112 194 M145 151 L215 194 M91 69 L161 112 M42 151 L145 151 L91 69 Z M112 194 L215 194 L161 112 Z"/>
+                <path class="accent" d="M112 194 L145 151 M112 194 L91 69 M145 151 L161 112"/>
+                <path class="green" d="M91 69 L215 194"/>
+                <circle cx="42" cy="151" r="3" fill="#18324b"/><circle cx="145" cy="151" r="3" fill="#18324b"/><circle cx="91" cy="69" r="3" fill="#18324b"/>
+                <circle cx="112" cy="194" r="3" fill="#18324b"/><circle cx="215" cy="194" r="3" fill="#18324b"/><circle cx="161" cy="112" r="3" fill="#18324b"/>
+                <text x="27" y="168">A</text><text x="147" y="169">B</text><text x="77" y="65">C</text>
+                <text x="97" y="216">A′</text><text x="219" y="210">B′</text><text x="164" y="108">C′</text>
+                <text x="258" y="82">T₁ = ABCA′</text><text x="258" y="112">T₂ = BCA′B′</text><text x="258" y="142">T₃ = CA′B′C′</text>
+                <text x="258" y="184">Füllversuch prüft:</text><text x="258" y="210">Volumenverhältnis 1 : 3</text>
+                <text x="40" y="226">Dreiecksprisma: T₁ + T₂ + T₃</text>
+              </g>
+              <g data-step="2" hidden>
+                <path class="orange-fill" d="M48 58 L28 103 L68 103 Z M116 58 L96 103 L136 103 Z M184 58 L164 103 L204 103 Z"/>
+                <path class="edge" d="M48 58 L28 103 L68 103 Z M116 58 L96 103 L136 103 Z M184 58 L164 103 L204 103 Z"/>
+                <text x="45" y="123">1</text><text x="113" y="123">2</text><text x="181" y="123">3</text>
+                <rect class="blue-fill" x="236" y="68" width="58" height="92"/><path class="edge" d="M236 68 L392 68 L392 160 L236 160 Z M294 68 L294 160 M343 68 L343 160"/>
+                <path class="accent" d="M236 48 L392 48"/>
+                <text x="250" y="113">Füllung 1</text><text x="303" y="183">Prisma</text><text x="308" y="42">Länge h</text><text x="245" y="57">Grundfläche G</text>
+              </g>
+              <g data-step="3" hidden>
+                <path class="orange-fill" d="M48 58 L28 103 L68 103 Z M116 58 L96 103 L136 103 Z M184 58 L164 103 L204 103 Z"/>
+                <path class="edge" d="M48 58 L28 103 L68 103 Z M116 58 L96 103 L136 103 Z M184 58 L164 103 L204 103 Z"/>
+                <text x="45" y="123">1</text><text x="113" y="123">2</text><text x="181" y="123">3</text>
+                <rect class="blue-fill" x="236" y="68" width="107" height="92"/><path class="edge" d="M236 68 L392 68 L392 160 L236 160 Z M294 68 L294 160 M343 68 L343 160"/>
+                <path class="accent" d="M236 48 L392 48"/>
+                <text x="249" y="113">Füllung 1 + 2</text><text x="303" y="183">2 von 3 Teilen</text><text x="308" y="42">Länge h</text><text x="245" y="57">Grundfläche G</text>
+              </g>
+              <g data-step="4" hidden>
+                <path class="orange-fill" d="M48 58 L28 103 L68 103 Z M116 58 L96 103 L136 103 Z M184 58 L164 103 L204 103 Z"/>
+                <path class="edge" d="M48 58 L28 103 L68 103 Z M116 58 L96 103 L136 103 Z M184 58 L164 103 L204 103 Z"/>
+                <text x="45" y="123">1</text><text x="113" y="123">2</text><text x="181" y="123">3</text>
+                <rect class="blue-fill" x="236" y="68" width="156" height="92"/><path class="edge" d="M236 68 L392 68 L392 160 L236 160 Z M294 68 L294 160 M343 68 L343 160"/>
+                <path class="accent" d="M236 48 L392 48"/>
+                <text x="253" y="114">voll: G · h</text><text x="259" y="190">V = ⅓Gh</text><text x="308" y="42">Länge h</text><text x="245" y="57">Grundfläche G</text>
+              </g>
+              <g data-step="5" hidden>
+                <path class="orange-fill" d="M180 78 L240 78 L210 38 Z M180 138 L240 138 L210 178 Z M180 78 L180 138 L140 108 Z M240 78 L240 138 L280 108 Z"/>
+                <rect class="blue-fill" x="180" y="78" width="60" height="60"/>
+                <path class="edge" d="M180 78 L240 78 L240 138 L180 138 Z M180 78 L210 38 M240 78 L210 38 M180 138 L210 178 M240 138 L210 178 M180 78 L140 108 M180 138 L140 108 M240 78 L280 108 M240 138 L280 108"/>
+                <path class="accent" d="M210 38 L210 78 M210 71 L217 71 L217 78"/>
+                <text x="207" y="112">G</text><text x="214" y="62">l</text><text x="207" y="156">a</text>
+                <text x="298" y="58">Seiten-Dreieck:</text><text x="298" y="83">Aᵢ = ½ aᵢ · lᵢ</text>
+                <text x="298" y="120">regelmäßig:</text><text x="298" y="145">M = ½l · Σaᵢ</text>
+                <text x="298" y="172">p = Σaᵢ</text><text x="298" y="202">M = ½pl</text>
+              </g>
+            </svg>
+          </div>
+          <div class="anim-copy" aria-live="polite" data-live>
+            <div class="anim-step" data-step="0"><h4>1. Start beim Prisma</h4><p>Ein Prisma mit Grundfläche G und Höhe h hat das Volumen G · h. Wir vergleichen eine Pyramide mit gleicher Grundfläche und Höhe.</p></div>
+            <div class="anim-step" data-step="1" hidden><h4>2. Drei Pyramidenteile betrachten</h4><p>Die Skizze zeigt eine Zerlegung eines Dreiecksprismas in drei Tetraeder. Sie hilft, den Zusammenhang zu sehen, ist aber kein Beweis dafür, dass ihre Volumina gleich sind.</p></div>
+            <div class="anim-step" data-step="2" hidden><h4>3. Erstes Teil einsetzen</h4><p>Setze gedanklich die erste Füllung in das Prisma ein. Das Gefäß hat überall den Querschnitt G; die Füllung nimmt daher ein Drittel der Prismalänge h ein.</p></div>
+            <div class="anim-step" data-step="3" hidden><h4>4. Zweites Teil einsetzen</h4><p>Eine zweite gleich große Pyramidenfüllung ergänzt das Prisma bis zu zwei Dritteln seiner Länge.</p></div>
+            <div class="anim-step" data-step="4" hidden><h4>5. Drittes Teil ergänzt das Prisma</h4><p>Die dritte gleich große Füllung macht das Prisma voll. Das ist ein Füllversuch mit Volumina, keine passgenaue geometrische Zerlegung der Pyramidenformen.</p><p class="math">V<sub>Pyramide</sub> = ⅓ · V<sub>Prisma</sub> = ⅓Gh</p></div>
+            <div class="anim-step" data-step="5" hidden><h4>6. Mantelnetz und Seitenflächen addieren</h4><p>Im Netz ist jede Seitenfläche ein Dreieck. Für jede einzelne gilt Aᵢ = ½ · aᵢ · lᵢ, wobei aᵢ eine Grundkante und lᵢ die dazu senkrechte Seitenhöhe ist. Bei einer regelmäßigen Pyramide sind alle Seitenhöhen gleich l. Deshalb wird M = Σ(½aᵢl) = ½lΣaᵢ. Da Σaᵢ der Grundflächenumfang p ist, folgt M = ½pl. Bei einer nicht regelmäßigen Pyramide müssen die einzelnen Aᵢ berechnet und addiert werden.</p><p class="math">M = Σ(½aᵢlᵢ); regelmäßig: M = ½pl; O = G + M</p></div>
+            <div class="anim-progress" data-progress></div>
+            <div class="anim-controls"><button type="button" data-previous>Zurück</button><button type="button" data-next>Weiter</button><button type="button" data-replay>Von vorn</button></div>
+          </div>
+        </div>
+        <div class="assembly-task" data-pyramid-builder>
+          <h4>Du bist dran: Fülle das Prisma mit drei Pyramidenteilen</h4>
+          <p>Setze jedes Teil mit einem Klick ein. Jedes Teil steht für eine Pyramidenfüllung mit derselben Grundfläche G und Höhe h. Die Teilflächen im Prisma zeigen gleiche Volumenanteile; die Pyramidenformen werden dabei nicht passgenau ineinandergesteckt.</p>
+          <div class="assembly-controls">
+            <button type="button" data-piece="1" aria-pressed="false">Teil 1 einsetzen</button>
+            <button type="button" data-piece="2" aria-pressed="false">Teil 2 einsetzen</button>
+            <button type="button" data-piece="3" aria-pressed="false">Teil 3 einsetzen</button>
+            <button type="button" data-builder-reset>Von vorn</button>
+          </div>
+          <div class="figure">
+            <svg viewBox="0 0 420 175" role="img" aria-label="Prisma mit drei gleich großen Volumenanteilen, die durch die drei Teile gefüllt werden">
+              <path class="shape" d="M61 48 L336 48 L382 70 L107 70 Z M61 48 L61 137 L336 137 L336 48 M336 48 L382 70 L382 158 L336 137"/>
+              <rect class="prism-cell" data-cell="1" x="62" y="49" width="91" height="87"/>
+              <rect class="prism-cell" data-cell="2" x="153" y="49" width="92" height="87"/>
+              <rect class="prism-cell" data-cell="3" x="245" y="49" width="91" height="87"/>
+              <path class="edge" d="M61 48 L336 48 L382 70 L382 158 L336 137 L61 137 Z M336 48 L336 137 M153 49 L153 136 M245 49 L245 136"/>
+              <text x="86" y="99">Teil 1</text><text x="176" y="99">Teil 2</text><text x="268" y="99">Teil 3</text>
+              <text x="174" y="166">Prisma: Grundfläche G, Höhe h</text>
+            </svg>
+          </div>
+          <p class="assembly-status" data-builder-status aria-live="polite">Noch kein Teil eingesetzt: 0 von 3.</p>
+        </div>
+        <div class="derivation-questions"><h4>Fragen zur Herleitung</h4><ol><li>Wie lässt sich im Füllversuch der Volumenfaktor der Pyramide bestimmen?</li><li>Warum ist die Pyramidenhöhe h die senkrechte Höhe und nicht die schräge Seitenhöhe?</li><li>Wie werden die einzelnen Seitenflächen zur Mantelfläche M addiert?</li><li>Warum darf bei einer regelmäßigen Pyramide die gemeinsame Seitenhöhe l ausgeklammert werden?</li></ol><details><summary>Lösungsideen anzeigen</summary><ol><li>Drei Füllungen einer Pyramide mit Grundfläche G und Höhe h füllen das Prisma. Eine Füllung hat daher ein Drittel des Prismenvolumens.</li><li>Die Höhe in der Volumenformel ist der senkrechte Abstand von der Spitze zur Grundfläche. Eine schräge Seitenhöhe beschreibt eine Dreiecksfläche des Mantels.</li><li>Für jedes Dreieck gilt Aᵢ = ½aᵢlᵢ. Die Einzelflächen werden addiert: M = Σ(½aᵢlᵢ).</li><li>Bei einer regelmäßigen Pyramide sind alle Seiten-Dreiecke gleich hoch (lᵢ = l). Dann ist M = ½lΣaᵢ = ½lp, weil die Summe der Grundkanten der Umfang p ist. Mit der Grundfläche gilt O = G + M.</li></ol></details><p class="question-note"><strong>Bei Fragen:</strong> Notiere sie in deinem Heft, um sie mit deiner Mitschülerin oder deinem Mitschüler und der Lehrkraft zu besprechen. Fragen sind positiv!</p></div>
+      </article>
+      <aside class="source-links" aria-label="Weiterführendes Video zur Pyramide">
+        <h3>Weiterlernen: Pyramide</h3>
+        <ul><li><a href="https://www.youtube.com/watch?v=WnqW6meEPSE" target="_blank" rel="noopener noreferrer">Pyramidenvolumen – Herleitung der Formel (YouTube)</a></li></ul>
+        <p class="source-note">Das Video ergänzt den Füllversuch auf dieser Seite durch eine weitere Erklärung der Volumenformel.</p>
+      </aside>
+      <div class="tasks">
+        <h3>Übungen: Volumen und Oberfläche</h3>
+        <ol>
+          <li>Eine quadratische Pyramide hat a = 6 cm und h = 10 cm. Berechne V.</li>
+          <li>Eine Pyramide hat G = 42 cm² und h = 9 cm. Berechne V.</li>
+          <li>Eine regelmäßige quadratische Pyramide hat a = 8 cm und Seitenhöhe l = 5 cm. Berechne M und O.</li>
+          <li>Eine quadratische Pyramide hat a = 8 cm und V = 192 cm³. Berechne h.</li>
+        </ol>
+        <details><summary>Lösungen anzeigen</summary>
+          <p><strong>1.</strong> V = ⅓ · 36 · 10 = <strong>120 cm³</strong>.</p>
+          <p><strong>2.</strong> V = ⅓ · 42 · 9 = <strong>126 cm³</strong>.</p>
+          <p><strong>3.</strong> M = 4 · (½ · 8 · 5) = 80 cm²; O = 64 + 80 = <strong>144 cm²</strong>.</p>
+          <p><strong>4.</strong> 192 = ⅓ · 64 · h, also <strong>h = 9 cm</strong>.</p>
+        </details>
+        <fieldset class="self-check"><legend>Meine Einschätzung</legend><p>Wie sicher fühlst du dich mit der Herleitung und den Rechnungen?</p><div class="self-check-options"><label><input type="radio" name="selbst-pyramide" value="fragen"> Ich habe noch Fragen.</label><label><input type="radio" name="selbst-pyramide" value="verstanden"> Ich habe den Inhalt gut verstanden.</label></div></fieldset>
+      </div>
+    </section>
+
+    <section id="stumpf" aria-labelledby="title-stumpf">
+      <h2 id="title-stumpf"><span class="section-number">5</span>Pyramidenstumpf</h2>
+      <div class="grid">
+        <article class="panel">
+          <h3>Was bleibt nach dem Abschneiden?</h3>
+          <div class="figure">
+            <svg viewBox="0 0 340 240" role="img" aria-labelledby="frustum-title frustum-desc">
+              <title id="frustum-title">Quadratischer Pyramidenstumpf mit Höhen und Grundkanten</title>
+              <desc id="frustum-desc">Eine Pyramide ist parallel zur Grundfläche abgeschnitten. Der Stumpf besitzt eine obere und untere quadratische Fläche mit Kantenlängen a und b sowie der senkrechten Höhe h.</desc>
+              <path class="shape-alt" d="M75 103 L186 103 L230 128 L119 128 Z"/>
+              <path class="shape" d="M49 174 L211 174 L267 205 L105 205 Z"/>
+              <path class="shape" d="M75 103 L49 174 L105 205 L119 128 M186 103 L211 174 L267 205 L230 128"/>
+              <path class="edge" d="M75 103 L186 103 L230 128 M75 103 L119 128 M49 174 L211 174 L267 205 M49 174 L105 205"/>
+              <path class="hidden" d="M119 128 L230 128 M105 205 L267 205 M119 128 L105 205"/>
+              <path class="guide" d="M147 108 L147 185"/>
+              <text x="145" y="98">a</text><text x="112" y="223">b</text><text x="154" y="151">h</text>
+            </svg>
+            <figcaption>Oben: Kantenlänge a und Fläche G₂ = a². Unten: Kantenlänge b und Fläche G₁ = b². h misst senkrecht von einer Grundfläche zur anderen.</figcaption>
+          </div>
+          <p>Ein Pyramidenstumpf entsteht, wenn eine Pyramide parallel zur Grundfläche abgeschnitten wird. Die <strong>untere Grundfläche</strong> hat den Flächeninhalt G₁, die <strong>obere Grundfläche</strong> G₂; h ist der senkrechte Abstand zwischen ihnen.</p>
+          <div class="formula">V = h/3 · (G₁ + √(G₁G₂) + G₂)</div>
+          <p>Beim quadratischen Stumpf mit unterer Kantenlänge b und oberer Kantenlänge a gilt G₁ = b² und G₂ = a²; damit <strong>V = h/3 · (a² + ab + b²)</strong>.</p>
+          <p>Oberfläche: <strong>O = G<sub>1</sub> + G<sub>2</sub> + M</strong>. Für den <strong>geraden regelmäßigen</strong> Pyramidenstumpf gilt <strong>M = ½(U₁ + U₂)l</strong>. Dabei ist <strong>U₁</strong> der Umfang der unteren Grundfläche und <strong>U₂</strong> der Umfang der oberen Grundfläche; <strong>l</strong> ist die schräge Seitenhöhe der Trapeze. Die Formel entsteht, indem die Trapezflächen ½ · (untere Kante + obere Kante) · l addiert werden. Bei einem nicht regelmäßigen Stumpf werden die einzelnen Seitenflächen berechnet und addiert.</p>
+          <div class="warning"><strong>Achtung:</strong> h ist der senkrechte Abstand der beiden Grundflächen, nicht die schräge Seitenhöhe.</div>
+          <h3>Warum sind die Pyramiden ähnlich? Strahlensatz</h3>
+          <p>Der Schnitt ist parallel zur Grundfläche. So entstehen ein kleines und ein großes ähnliches Dreieck. Entsprechende Seiten und Höhen stehen im gleichen Verhältnis.</p>
+          <div class="figure">
+            <svg viewBox="0 0 440 245" role="img" aria-labelledby="intercept-title intercept-desc">
+              <title id="intercept-title">Strahlensatz an der abgeschnittenen Pyramide</title>
+              <desc id="intercept-desc">Zwei Strahlen gehen vom Pyramidenscheitel S aus und schneiden zwei parallele Strecken. Die kleine obere Strecke a und Höhe H minus h gehören zusammen; die große untere Strecke b und Gesamthöhe H gehören zusammen. Die Stumpfhöhe ist h.</desc>
+              <path class="shape-alt" d="M220 25 L115 213 L325 213 Z"/>
+              <path class="edge" d="M220 25 L168 119 M220 25 L272 119 M220 25 L115 213 M220 25 L325 213"/>
+              <path class="accent" d="M168 119 L272 119"/>
+              <path class="edge" d="M115 213 L325 213"/>
+              <path class="guide" d="M220 25 L220 213 M168 119 L220 119 M220 119 L220 213"/>
+              <path class="guide" d="M210 113 L216 113 M210 207 L216 207"/>
+              <text x="211" y="18">S</text><text x="178" y="75">H − h</text><text x="226" y="170">h</text><text x="226" y="210">H</text>
+              <text x="278" y="116">a</text><text x="330" y="211">b</text>
+              <text x="278" y="75">Strahlen</text><text x="278" y="102">Schnitt ∥ Grundfläche</text>
+              <text x="25" y="239">a/b = (H − h)/H</text>
+            </svg>
+            <figcaption>Die kleine und große Dreiecksseite sind parallel. Entsprechende Seiten und Höhen haben dasselbe Verhältnis: a/b = (H − h)/H.</figcaption>
+          </div>
+          <p class="small">Beim quadratischen Stumpf sind a = √G₂ (obere Kante) und b = √G₁ (untere Kante). Daher lautet derselbe Strahlensatz <strong>a/b = √(G₂/G₁) = (H − h)/H</strong>. H ist die Höhe der ganzen Pyramide vom Scheitel bis zur unteren Grundfläche.</p>
+        </article>
+      </div>
+      <article class="animation" data-animation="stumpf" aria-labelledby="stumpf-animation-title">
+        <h3 id="stumpf-animation-title">Entdeckanimation: Volumen und Oberfläche</h3>
+        <p class="learning-goal"><strong>Lernziel:</strong> Ich kann durch Ähnlichkeit und schrittweises Vereinfachen die Volumenformel herleiten und die Oberfläche aus Grundflächen und trapezförmigen Seitenflächen zusammensetzen. Der algebraische Teil baut auf Brüchen und Potenzen auf.</p>
+        <p class="animation-intro">Verfolge erst die Ähnlichkeit der beiden Pyramiden, dann das Abziehen. Jeder Umformungsschritt bleibt sichtbar. Für die Oberfläche wird der Mantel aufgeklappt.</p>
+        <div class="anim-layout">
+          <div class="anim-drawing">
+            <svg viewBox="0 0 440 230" role="img" aria-label="Schrittweise Skizzen zur Herleitung von Volumen und Oberfläche eines Pyramidenstumpfs">
+              <g data-step="0"><path class="orange-fill" d="M220 28 L95 190 L345 190 Z"/><path class="blue-fill" d="M169 94 L137 145 L303 145 L271 94 Z"/><path class="edge" d="M220 28 L169 94 M220 28 L271 94"/><path class="guide" d="M220 28 L220 190 M169 94 L271 94"/><text x="229" y="66">H</text><text x="229" y="126">H − h</text><text x="229" y="177">h</text><text x="75" y="218">ganze Pyramide − kleine Pyramide</text></g>
+              <g data-step="1" hidden><path class="orange-fill" d="M95 190 L345 190 L310 155 L130 155 Z"/><path class="edge" d="M95 190 L345 190 M130 155 L310 155"/><path class="guide" d="M220 155 L220 190"/><text x="90" y="210">G₁</text><text x="294" y="151">G₂</text><text x="226" y="179">h</text><text x="92" y="70">Ähnliche Querschnitte</text></g>
+              <g data-step="2" hidden><rect class="blue-fill" x="48" y="47" width="344" height="132" rx="12"/><text x="79" y="94">V Stumpf = V groß − V klein</text><text x="69" y="139">= ⅓G₁H − ⅓G₂(H − h)</text></g>
+              <g data-step="3" hidden><rect class="blue-fill" x="38" y="42" width="364" height="145" rx="12"/><text x="61" y="82">k = (H − h)/H = √(G₂/G₁)</text><text x="61" y="122">h = H(1 − k)</text><text x="61" y="162">also: H = h/(1 − k)</text></g>
+              <g data-step="4" hidden><rect class="blue-fill" x="25" y="37" width="390" height="158" rx="12"/><text x="48" y="76">V = ⅓[G₁H − G₂(H − h)]</text><text x="48" y="116">G₂ = k²G₁ und H − h = kH</text><text x="48" y="156">= hG₁/3 · (1 − k³)/(1 − k)</text></g>
+              <g data-step="5" hidden><rect class="blue-fill" x="38" y="42" width="364" height="145" rx="12"/><text x="61" y="85">1 − k³ = (1 − k)(1 + k + k²)</text><text x="61" y="133">V = hG₁/3 · (1 + k + k²)</text></g>
+              <g data-step="6" hidden><rect class="green-fill" x="25" y="37" width="390" height="158" rx="12"/><text x="48" y="82">G₁k = √(G₁G₂)</text><text x="48" y="122">G₁k² = G₂</text><text x="48" y="162">V = h/3 · (G₁ + √(G₁G₂) + G₂)</text></g>
+              <g data-step="7" hidden><path class="blue-fill" d="M172 75 L268 75 L268 165 L172 165 Z"/><path class="orange-fill" d="M172 75 L220 28 L268 75 Z M172 165 L220 212 L268 165 Z M172 75 L127 120 L172 165 Z M268 75 L313 120 L268 165 Z"/><path class="edge" d="M172 75 L220 28 L268 75 M172 165 L220 212 L268 165 M172 75 L127 120 L172 165 M268 75 L313 120 L268 165"/><text x="161" y="125">Netz: 2 Grundflächen + Trapeze</text></g>
+              <g data-step="8" hidden><rect class="orange-fill" x="38" y="48" width="170" height="130" rx="12"/><rect class="blue-fill" x="237" y="48" width="168" height="130" rx="12"/><text x="55" y="94">A Trapez</text><text x="51" y="135">= ½(a+b)l</text><text x="251" y="94">O = G₁ + G₂ + M</text><text x="249" y="135">M = ½(U₁+U₂)l</text></g>
+            </svg>
+          </div>
+          <div class="anim-copy" aria-live="polite" data-live>
+            <div class="anim-step" data-step="0"><h4>1. Als Differenz sehen</h4><p>Der Stumpf entsteht aus einer großen Pyramide, von der oben eine kleinere, ähnliche Pyramide abgeschnitten wird. Die Gesamthöhe sei H, die Stumpfhöhe h.</p></div>
+            <div class="anim-step" data-step="1" hidden><h4>2. Ähnlichkeit nutzen</h4><p>Die linearen Maße der ähnlichen Pyramiden verhalten sich wie ihre entsprechenden Seiten. Daher ist k = √(G₂/G₁) = (H − h)/H.</p></div>
+            <div class="anim-step" data-step="2" hidden><h4>3. Volumen abziehen</h4><p>Für jede Pyramide gilt V = ⅓Gh. Ziehe das Volumen der kleinen Pyramide vom Volumen der großen ab.</p><p class="math">V = ⅓G₁H − ⅓G₂(H − h)</p></div>
+            <div class="anim-step" data-step="3" hidden><h4>4. Höhenverhältnis umstellen</h4><p>Setze den gemeinsamen Längenmaßstab k = (H − h)/H. Multipliziere mit H und stelle nach H um:</p><p class="math">H − h = kH &nbsp;⇒&nbsp; h = H(1 − k) &nbsp;⇒&nbsp; H = h/(1 − k)</p></div>
+            <div class="anim-step" data-step="4" hidden><h4>5. In die Volumendifferenz einsetzen</h4><p>Die Flächen ähnlicher Grundrisse verhalten sich wie das Quadrat der Längen: G₂ = k²G₁. Die kleine Pyramide hat Höhe H − h = kH. Setze dies in V = ⅓[G₁H − G₂(H − h)] ein und ersetze H durch h/(1 − k).</p><p class="math">V = hG₁/3 · (1 − k³)/(1 − k)</p></div>
+            <div class="anim-step" data-step="5" hidden><h4>6. Bruch vereinfachen</h4><p>Nutze die Zerlegung der Differenz von Kuben: 1 − k³ = (1 − k)(1 + k + k²). Der Faktor 1 − k kürzt sich.</p><p class="math">V = hG₁/3 · (1 + k + k²)</p></div>
+            <div class="anim-step" data-step="6" hidden><h4>7. Mit den Grundflächen schreiben</h4><p>Aus k = √(G₂/G₁) folgt G₁k = √(G₁G₂); außerdem ist G₁k² = G₂.</p><p class="math">V = h/3 · (G₁ + √(G₁G₂) + G₂)</p></div>
+            <div class="anim-step" data-step="7" hidden><h4>8. Oberfläche abwickeln</h4><p>Beim geraden regelmäßigen Pyramidenstumpf besteht der Mantel aus Trapezen. Die Grundkanten der Trapeze bilden unten zusammen den Umfang U₁ und oben den Umfang U₂. Zur Oberfläche gehören zusätzlich die beiden parallelen Grundflächen.</p></div>
+            <div class="anim-step" data-step="8" hidden><h4>9. Trapezflächen addieren</h4><p>Für jedes Trapez gilt Aᵢ = ½(aᵢ + bᵢ)l. Weil beim geraden regelmäßigen Stumpf alle Trapeze dieselbe schräge Höhe l haben, kann l ausgeklammert werden. U₁ ist der Umfang der unteren Grundfläche, U₂ der Umfang der oberen Grundfläche. Die schräge Seitenhöhe l ist nicht die senkrechte Stumpfhöhe h.</p><p class="math">M = ΣAᵢ = ½(U₁ + U₂)l &nbsp;⇒&nbsp; O = G₁ + G₂ + M</p></div>
+            <div class="anim-progress" data-progress></div><div class="anim-controls"><button type="button" data-previous>Zurück</button><button type="button" data-next>Weiter</button><button type="button" data-replay>Von vorn</button></div>
+          </div>
+        </div>
+        <div class="derivation-questions"><h4>Fragen zur Herleitung</h4><ol><li>Warum können für das abgeschnittene Stück ebenfalls die Pyramidenformeln verwendet werden?</li><li>Wofür steht √(G₁G₂) in der Volumenformel und wie hängt es mit der Ähnlichkeit zusammen?</li><li>Was bezeichnen U₁ und U₂ in der Mantelflächenformel?</li><li>Welche Höhe wird für die Trapezflächen gebraucht: die senkrechte Stumpfhöhe oder die schräge Seitenhöhe?</li></ol><details><summary>Lösungsideen anzeigen</summary><ol><li>Der Schnitt verläuft parallel zur Grundfläche. Daher ist das abgeschnittene Stück selbst eine kleinere Pyramide, ähnlich zur ganzen Pyramide.</li><li>Der Längenmaßstab der kleinen Pyramide zur großen ist k = √(G₂/G₁). Der mittlere Term ist kG₁ = √(G₁G₂); er entsteht beim Abziehen der beiden Pyramidenvolumina.</li><li>U₁ ist der Umfang der unteren Grundfläche, U₂ der Umfang der oberen Grundfläche. Beim Addieren der Trapezflächen erscheinen genau diese beiden Kantensummen.</li><li>Für den Flächeninhalt der Seiten-Trapeze braucht man deren schräge Seitenhöhe l. Die senkrechte Stumpfhöhe h wird dagegen in der Volumenformel verwendet.</li></ol></details><p class="question-note"><strong>Bei Fragen:</strong> Notiere sie in deinem Heft, um sie mit deiner Mitschülerin oder deinem Mitschüler und der Lehrkraft zu besprechen. Fragen sind positiv!</p></div>
+      </article>
+      <aside class="source-links" aria-label="Weiterführendes Video zum Pyramidenstumpf">
+        <h3>Weiterlernen: Pyramidenstumpf</h3>
+        <ul><li><a href="https://www.youtube.com/watch?v=kFj-9bDmqrE" target="_blank" rel="noopener noreferrer">Pyramidenstumpf – Volumen mit der Formel berechnen (YouTube, Lehrerschmidt)</a></li></ul>
+        <p class="source-note">Das Video zeigt das Einsetzen und Berechnen mit der Volumenformel; die Herleitung über Ähnlichkeit und Strahlensatz findest du hier auf der Seite.</p>
+      </aside>
+      <div class="tasks">
+        <h3>Übungen: Volumen und Oberfläche</h3>
+        <ol>
+          <li>Ein quadratischer Stumpf hat Grundkanten 8 cm und 4 cm sowie h = 6 cm. Berechne V.</li>
+          <li>Für einen Stumpf gilt G₁ = 100 cm², G₂ = 25 cm² und h = 9 cm. Berechne V.</li>
+          <li>Ein regelmäßiger quadratischer Stumpf hat untere Kante 10 cm, obere Kante 6 cm und Seitenhöhe l = 5 cm. Berechne M und O.</li>
+          <li>Ein Stumpf hat G₁ = 144 cm², G₂ = 36 cm² und h = 12 cm. Berechne V.</li>
+        </ol>
+        <details><summary>Lösungen anzeigen</summary>
+          <p><strong>1.</strong> V = 6/3 · (8² + 8 · 4 + 4²) = <strong>224 cm³</strong>.</p>
+          <p><strong>2.</strong> V = 9/3 · (100 + 50 + 25) = <strong>525 cm³</strong>.</p>
+          <p><strong>3.</strong> M = ½(40 + 24) · 5 = 160 cm²; O = 100 + 36 + 160 = <strong>296 cm²</strong>.</p>
+          <p><strong>4.</strong> V = 12/3 · (144 + 72 + 36) = <strong>1008 cm³</strong>.</p>
+        </details>
+        <fieldset class="self-check"><legend>Meine Einschätzung</legend><p>Wie sicher fühlst du dich mit der Herleitung und den Rechnungen?</p><div class="self-check-options"><label><input type="radio" name="selbst-stumpf" value="fragen"> Ich habe noch Fragen.</label><label><input type="radio" name="selbst-stumpf" value="verstanden"> Ich habe den Inhalt gut verstanden.</label></div></fieldset>
+      </div>
+    </section>
+
+    <section id="kugel" aria-labelledby="title-kugel">
+      <h2 id="title-kugel"><span class="section-number">6</span>Kugel</h2>
+      <div class="grid">
+        <article class="panel">
+          <h3>Merkmale und Formeln</h3>
+          <div class="figure">
+            <svg viewBox="0 0 340 240" role="img" aria-labelledby="sphere-title sphere-desc">
+              <title id="sphere-title">Kugel mit Radius r</title>
+              <desc id="sphere-desc">Eine Kugel als Kreis mit eingezeichnetem Durchmesser d durch den Mittelpunkt und einem Radius r vom Mittelpunkt zur Oberfläche.</desc>
+              <circle class="shape" cx="160" cy="118" r="82"/>
+              <ellipse class="edge" cx="160" cy="118" rx="82" ry="27"/>
+              <path class="hidden" d="M78 118 C78 154 242 154 242 118"/>
+              <path class="accent" d="M78 118 L242 118"/>
+              <path class="edge" d="M160 118 L229 73"/>
+              <circle cx="160" cy="118" r="4" fill="#18324b"/>
+              <text x="193" y="91">r</text><text x="135" y="112">M</text><text x="195" y="114">d</text>
+            </svg>
+          </div>
+          <p>Alle Punkte der Kugeloberfläche haben vom Mittelpunkt <strong>M</strong> denselben Abstand <strong>r</strong>. Der größte Kreis durch den Mittelpunkt heißt Großkreis. Sein <strong>Durchmesser d = 2r</strong> verbindet zwei gegenüberliegende Punkte der Kugeloberfläche und geht durch M.</p>
+          <div class="formula">V = ⁴⁄₃πr³</div>
+          <div class="formula">O = 4πr²</div>
+        </article>
+        <article class="panel">
+          <h3>Herleitung: Halbkugel und Zylinder</h3>
+          <div class="figure">
+            <svg viewBox="0 0 480 265" role="img" aria-labelledby="sphere-proof-title sphere-proof-desc">
+              <title id="sphere-proof-title">Halbkugel im Vergleich zu Zylinder minus Kegel</title>
+              <desc id="sphere-proof-desc">Links die obere Halbkugel mit Radius r und Höhe r. Rechts ein Zylinder gleichen Radius und gleicher Höhe, aus dem ein Kegel mit Spitze in der Mitte der Grundfläche herausgenommen ist. Die horizontalen Querschnittsflächen stimmen jeweils überein.</desc>
+              <path class="fill-blue" d="M70 155 A72 72 0 0 1 214 155 L214 158 L70 158 Z"/>
+              <path class="edge" d="M70 155 A72 72 0 0 1 214 155"/>
+              <path class="hidden" d="M70 155 C70 177 214 177 214 155"/>
+              <path class="edge" d="M70 155 L70 158 M214 155 L214 158 M70 158 C70 180 214 180 214 158"/>
+              <path class="guide" d="M142 83 L142 158"/>
+              <path class="edge" d="M142 158 L210 158"/>
+              <text x="148" y="121">r</text><text x="174" y="153">r</text>
+              <text x="77" y="214">Halbkugel</text>
+              <path class="fill-green" d="M282 83 C282 64 426 64 426 83 L426 158 C426 177 282 177 282 158 Z"/>
+              <ellipse class="fill-green" cx="354" cy="83" rx="72" ry="19"/>
+              <path class="hidden" d="M282 158 C282 139 426 139 426 158"/>
+              <path class="fill-orange" d="M354 158 L282 83 C282 64 426 64 426 83 Z"/>
+              <path class="edge" d="M354 158 L282 83 M354 158 L426 83"/>
+              <path class="guide" d="M426 83 L426 158"/>
+              <path class="accent" d="M142 122 L202 122 M354 122 L426 122"/>
+              <path class="guide" d="M142 158 L142 122 M354 158 L354 122"/>
+              <path class="guide" d="M354 122 L388 122"/>
+              <text x="148" y="118">ρ</text><text x="365" y="118">x</text><text x="429" y="118">r</text>
+              <text x="382" y="77">r</text><text x="429" y="125">r</text><text x="360" y="150">x</text>
+              <text x="284" y="214">Zylinder − Kegel</text>
+              <text x="52" y="246">in derselben Höhe x: gleiche Flächen</text>
+            </svg>
+            <figcaption>Links ist blau die obere Halbkugel. Rechts ist grün der Zylinder und orange der herausgenommene Kegel. Für den genauen Flächenvergleich sind die Radien im folgenden vergrößerten Schnittbild beschriftet.</figcaption>
+          </div>
+          <div class="derivation">
+            <h3>Querschnitte vergleichen (Cavalieri)</h3>
+            <p>Stelle die Halbkugel einem Zylinder mit Radius r und Höhe r gegenüber. Der herausgenommene Kegel hat seine Spitze in der Mitte des Zylinderbodens und seine Grundfläche am oberen Rand. In der Höhe x über dem Boden hat der Halbkugelkreis den Radius ρ = √(r² − x²). Der Zylinderquerschnitt ohne den Kegel ist ein Ring: Seine Fläche ist π(r² − x²) = πρ². Da der Vergleichskegel Höhe r und Grundradius r hat, ist sein Querschnittsradius in Höhe x ebenfalls x; r bleibt der Zylinderradius.</p>
+            <ol class="steps">
+              <li>Der Zylinder hat Volumen πr² · r = πr³.</li>
+              <li>Der herausgenommene Kegel hat Volumen ⅓πr² · r = ⅓πr³.</li>
+              <li>Die Halbkugel hat daher ⅔πr³. Eine ganze Kugel besteht aus zwei Halbkugeln.</li>
+            </ol>
+            <p class="center"><strong>V<sub>Kugel</sub> = 2 · ⅔πr³ = ⁴⁄₃πr³</strong></p>
+          </div>
+          <h3>Genau hinsehen: gleicher Querschnitt in der Höhe x</h3>
+          <div class="figure">
+            <svg class="wide-diagram" viewBox="0 0 560 300" role="img" aria-labelledby="sphere-slice-title sphere-slice-desc">
+              <title id="sphere-slice-title">Vergleich der Querschnitte von Halbkugel und Zylinder minus Kegel</title>
+              <desc id="sphere-slice-desc">Links zeigt eine Halbkugel den horizontalen Schnitt in der Höhe x über dem Boden. Der Schnittkreisradius ist rho und erfüllt rho zum Quadrat gleich r zum Quadrat minus x zum Quadrat. Rechts zeigt ein Zylinder mit Kegelspitze am Boden den Ringquerschnitt in derselben Höhe. Sein Außenradius ist r, der Innenradius des entfernten Kegels x; die Ringfläche pi mal r zum Quadrat minus x zum Quadrat ist damit pi rho zum Quadrat.</desc>
+              <path class="fill-blue" d="M38 190 A87 87 0 0 1 212 190 Z"/>
+              <path class="edge" d="M38 190 A87 87 0 0 1 212 190"/>
+              <path class="guide" d="M125 103 L125 190"/>
+              <path class="accent" d="M125 146 L200 146"/>
+              <path class="edge" d="M125 190 L125 103"/>
+              <text x="133" y="123">r</text><text x="96" y="173">x</text><text x="168" y="140">ρ</text>
+              <text x="44" y="220">Halbkugel: ρ² = r² − x²</text>
+              <text x="62" y="36">Kugelschnitt</text>
+
+              <path class="fill-green" d="M324 103 C324 90 498 90 498 103 L498 190 C498 203 324 203 324 190 Z"/>
+              <ellipse class="fill-green" cx="411" cy="103" rx="87" ry="13"/>
+              <path class="hidden" d="M324 190 C324 177 498 177 498 190"/>
+              <path class="fill-orange" d="M411 190 L324 103 C324 90 498 90 498 103 Z"/>
+              <path class="edge" d="M411 190 L324 103 M411 190 L498 103"/>
+              <path class="accent" d="M411 146 L498 146"/>
+              <path class="guide" d="M411 146 L455 146"/>
+              <path class="guide" d="M411 190 L411 146"/>
+              <text x="432" y="137">x</text><text x="466" y="158">r</text><text x="442" y="124">Ring</text><text x="420" y="177">x</text>
+              <text x="313" y="220">Zylinder − Kegel: A = π(r² − x²)</text>
+              <text x="354" y="36">Schnitt in derselben Höhe x</text>
+              <rect class="fill-blue" x="59" y="239" width="442" height="42" rx="8"/>
+              <text x="74" y="266">ρ = √(r² − x²)  ⇒  πρ² = π(r² − x²)</text>
+            </svg>
+            <figcaption>Links ist ρ der Radius des Kugelschnitts. Rechts zeigt x den Innenradius des entfernten Kegels und r den Außenradius des Zylinders; der verbleibende Ring hat dieselbe Fläche wie der Kugelschnitt.</figcaption>
+          </div>
+          <p class="small">Der Ring hat nicht selbst den Radius ρ: Sein Außenradius ist r und der entfernte Kegel hat dort den Radius x. Der flächengleiche Vergleichskreis hat den Radius ρ = √(r² − x²). So wird sichtbar, warum die Querschnittsflächen gleich groß sind.</p>
+          <p class="small">Cavalieri-Prinzip: Haben zwei Körper gleich hohe Querschnitte mit stets gleichem Flächeninhalt, dann haben sie dasselbe Volumen.</p>
+        </article>
+      </div>
+      <article class="animation" data-animation="kugel" aria-labelledby="kugel-animation-title">
+        <h3 id="kugel-animation-title">Entdeckanimation: Volumen und Oberfläche</h3>
+        <p class="learning-goal"><strong>Lernziel:</strong> Ich kann die Kugel-Volumenformel aus dem Vergleich von Querschnitten herleiten und erklären, warum die Kugeloberfläche so groß ist wie die Mantelfläche des passenden Zylinders.</p>
+        <p class="animation-intro">Die Volumenherleitung vergleicht Querschnitte einer Halbkugel und eines Zylinders mit herausgenommenem Kegel. Die Oberflächenherleitung nutzt sehr schmale Kugelbänder; der dabei verwendete Grenzwertgedanke ist als anschauliche Begründung gedacht.</p>
+        <div class="anim-layout">
+          <div class="anim-drawing">
+            <svg viewBox="0 0 440 230" role="img" aria-label="Schrittweise Skizzen zur Herleitung der Kugelformeln">
+              <g data-step="0"><circle class="blue-fill" cx="210" cy="112" r="78"/><path class="edge" d="M210 112 L277 72"/><circle cx="210" cy="112" r="3" fill="#18324b"/><text x="239" y="83">r</text><text x="177" y="104">M</text><text x="155" y="216">Kugel und Radius r</text></g>
+              <g data-step="1" hidden><path class="blue-fill" d="M70 168 A65 65 0 0 1 200 168 Z"/><path class="green-fill" d="M263 48 L393 48 L393 168 L263 168 Z"/><path class="orange-fill" d="M328 168 L263 48 L393 48 Z"/><path class="guide" d="M135 103 L135 168 M328 48 L328 168"/><text x="77" y="201">Halbkugel</text><text x="263" y="201">Zylinder − Kegel</text><text x="205" y="106">gleiche Schnitte</text></g>
+              <g data-step="2" hidden><rect class="green-fill" x="45" y="48" width="160" height="130" rx="12"/><rect class="orange-fill" x="235" y="48" width="160" height="130" rx="12"/><text x="77" y="94">Zylinder</text><text x="66" y="132">πr² · r = πr³</text><text x="268" y="94">Kegel</text><text x="251" y="132">⅓πr² · r = ⅓πr³</text></g>
+              <g data-step="3" hidden><rect class="blue-fill" x="48" y="47" width="344" height="132" rx="12"/><text x="88" y="94">Halbkugel = πr³ − ⅓πr³</text><text x="106" y="143">= ⅔πr³</text><text x="92" y="211">Kugel: V = 2 · ⅔πr³ = ⁴⁄₃πr³</text></g>
+              <g data-step="4" hidden><circle class="blue-fill" cx="100" cy="122" r="70"/><path class="edge" d="M100 122 L142 66 M100 122 L142 122 M142 122 L142 66"/><path class="guide" d="M137 59 Q145 66 151 75"/><circle cx="100" cy="122" r="3" fill="#18324b"/><text x="112" y="89">r</text><text x="116" y="141">ρ</text><text x="146" y="101">z</text><text x="152" y="66">Δs</text><text x="205" y="87">Meridianschnitt</text><text x="205" y="116">r² = ρ² + z²</text><text x="205" y="151">kleine Kugelbänder</text><text x="205" y="178">mit Höhe Δz</text></g>
+              <g data-step="5" hidden><circle class="blue-fill" cx="83" cy="112" r="67"/><path class="guide" d="M19 80 Q83 68 147 80 M16 112 Q83 100 150 112 M19 144 Q83 132 147 144"/><path class="green-fill" d="M267 45 L390 45 L390 180 L267 180 Z"/><path class="edge" d="M267 45 L390 45 M267 180 L390 180"/><path class="guide" d="M267 80 L390 80 M267 112 L390 112 M267 144 L390 144"/><text x="16" y="212">schmale Kugelbänder</text><text x="254" y="207">Zylinder-Mantelstreifen</text><text x="269" y="31">Umfang 2πr</text><text x="398" y="119">2r</text></g>
+              <g data-step="6" hidden><rect class="green-fill" x="55" y="50" width="330" height="130" rx="12"/><text x="99" y="101">O Kugel = O Zylindermantel</text><text x="123" y="146">= 2πr · 2r = 4πr²</text></g>
+            </svg>
+          </div>
+          <div class="anim-copy" aria-live="polite" data-live>
+            <div class="anim-step" data-step="0"><h4>1. Radius als Schlüsselgröße</h4><p>Die Kugel wird durch ihren Radius r festgelegt. Für die Herleitung betrachten wir zunächst nur die obere Halbkugel.</p></div>
+            <div class="anim-step" data-step="1" hidden><h4>2. Querschnitte vergleichen</h4><p>In der Höhe x über der Grundfläche der Halbkugel hat der Kugelkreis den Radius ρ = √(r² − x²). Beim Zylinder bleibt nach dem Entfernen des Kegels ein Ring mit Fläche π(r² − x²) = πρ². Die Radien der flächengleichen Kreise stimmen überein.</p></div>
+            <div class="anim-step" data-step="2" hidden><h4>3. Zylinder und Kegel berechnen</h4><p>Beide Vergleichskörper haben Radius r und Höhe r. Der Zylinder hat Volumen πr³; der herausgenommene Kegel hat Volumen ⅓πr³.</p></div>
+            <div class="anim-step" data-step="3" hidden><h4>4. Volumen der Kugel folgern</h4><p>Nach dem Cavalieri-Prinzip haben die Halbkugel und „Zylinder minus Kegel“ dasselbe Volumen. Verdopple für die ganze Kugel.</p><p class="math">V = 2(πr³ − ⅓πr³) = ⁴⁄₃πr³</p></div>
+            <div class="anim-step" data-step="4" hidden><h4>5. Kugeloberfläche in Bänder zerlegen</h4><p>Betrachte im Meridianschnitt einen Punkt auf der Kugel. Mittelpunkt, Schnittkreisradius ρ und Höhe z bilden ein rechtwinkliges Dreieck; der Kugelradius r ist die Hypotenuse. Eine sehr schmale schräge Bandbreite sei Δs.</p><p class="math">ρ² + z² = r²</p></div>
+            <div class="anim-step" data-step="5" hidden><h4>6. Bandflächen vergleichen <span class="small">(anschauliche Grenzwert-Idee)</span></h4><p>Für sehr schmale Bänder gilt näherungsweise Δz/Δs = ρ/r. Das Kugelband hat Fläche etwa 2πρ · Δs. Einsetzen ergibt 2πρ · (r/ρ)Δz = 2πrΔz: genau die Fläche eines schmalen Streifens des Zylindermantels.</p><p>Je schmaler die Bänder, desto genauer ist der Vergleich. Addiert man alle Streifen, ist die Gesamthöhe des passenden Zylinders 2r.</p><p class="math">Bandfläche ≈ 2πρ · Δs = 2πr · Δz</p></div>
+            <div class="anim-step" data-step="6" hidden><h4>7. Mantelfläche des Zylinders</h4><p>Die Kugeloberfläche ist damit gleich der Mantelfläche eines Zylinders mit Radius r und Höhe 2r.</p><p class="math">O = 2πr · 2r = 4πr²</p></div>
+            <div class="anim-progress" data-progress></div><div class="anim-controls"><button type="button" data-previous>Zurück</button><button type="button" data-next>Weiter</button><button type="button" data-replay>Von vorn</button></div>
+          </div>
+        </div>
+        <div class="derivation-questions"><h4>Fragen zur Herleitung</h4><ol><li>Welches Körperpaar hat in jeder Höhe gleich große Querschnitte und damit dasselbe Volumen?</li><li>Wie erhält man aus Zylindervolumen minus Kegelvolumen das Volumen der Halbkugel?</li><li>Wie hoch ist der Zylinder, dessen Mantelfläche mit der Kugeloberfläche verglichen wird?</li><li>Warum stimmen die Flächen der sehr schmalen Kugelbänder im Grenzfall mit den Zylindermantelstreifen überein?</li></ol><details><summary>Lösungsideen anzeigen</summary><ol><li>Die obere Halbkugel und ein Zylinder, aus dem ein passender Kegel herausgenommen wurde, haben in jeder Höhe gleich große Querschnitte.</li><li>V = πr³ − ⅓πr³ = ⅔πr³. Verdoppelt ergibt das die ganze Kugel: ⁴⁄₃πr³.</li><li>Der Zylinder hat Höhe 2r und Radius r.</li><li>Im Meridianschnitt wächst die schräge Bandbreite Δs gegenüber der Höhenbreite Δz im Verhältnis r/ρ. Mit dem Bandumfang 2πρ kürzt sich ρ heraus: Die Bandfläche entspricht im Grenzfall 2πr · Δz.</li></ol></details><p class="question-note"><strong>Bei Fragen:</strong> Notiere sie in deinem Heft, um sie mit deiner Mitschülerin oder deinem Mitschüler und der Lehrkraft zu besprechen. Fragen sind positiv!</p></div>
+      </article>
+      <aside class="source-links" aria-label="Weiterführende Videos zur Kugel">
+        <h3>Weiterlernen: Kugel</h3>
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=EBdPcRfXru0" target="_blank" rel="noopener noreferrer">Kugel – Volumen und Oberfläche: Herleitung der Formeln (YouTube, Tobias Gnad / mathe-video.com)</a></li>
+          <li><a href="https://www.youtube.com/watch?v=wp9-sMtcxqw" target="_blank" rel="noopener noreferrer">Herleitung der Oberfläche einer Kugel (YouTube)</a></li>
+        </ul>
+        <p class="source-note">Das erste Video behandelt beide Formeln; das zweite konzentriert sich auf die Oberfläche. Beide Links führen zu externen Videos.</p>
+      </aside>
+      <div class="tasks">
+        <h3>Übungen: Volumen und Oberfläche</h3>
+        <ol>
+          <li>Eine Kugel hat r = 3 cm. Berechne V und O exakt.</li>
+          <li>Eine Kugel hat Durchmesser d = 10 cm. Berechne V und O exakt.</li>
+          <li>Eine Kugel hat r = 4 cm. Berechne V und O; gib V auch näherungsweise an.</li>
+          <li>Eine Kugel hat O = 144π cm². Bestimme r und anschließend V.</li>
+        </ol>
+        <details><summary>Lösungen anzeigen</summary>
+          <p><strong>1.</strong> V = 36π cm³; O = <strong>36π cm²</strong>.</p>
+          <p><strong>2.</strong> r = 5 cm; V = ⁴⁄₃π · 125 = <strong>500π/3 cm³</strong>; O = <strong>100π cm²</strong>.</p>
+          <p><strong>3.</strong> V = 256π/3 cm³ ≈ <strong>268,1 cm³</strong>; O = <strong>64π cm²</strong>.</p>
+          <p><strong>4.</strong> 4πr² = 144π, also r = 6 cm; V = ⁴⁄₃π · 216 = <strong>288π cm³</strong>.</p>
+        </details>
+        <fieldset class="self-check"><legend>Meine Einschätzung</legend><p>Wie sicher fühlst du dich mit der Herleitung und den Rechnungen?</p><div class="self-check-options"><label><input type="radio" name="selbst-kugel" value="fragen"> Ich habe noch Fragen.</label><label><input type="radio" name="selbst-kugel" value="verstanden"> Ich habe den Inhalt gut verstanden.</label></div></fieldset>
+      </div>
+    </section>
+
+    <section id="ueberblick" aria-labelledby="title-ueberblick">
+      <h2 id="title-ueberblick"><span class="section-number">✓</span>Formelübersicht und Tipps</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Körper</th><th>Volumen</th><th>Wichtige Größe</th></tr></thead>
+          <tbody>
+            <tr><td>Quader</td><td>V = a · b · c</td><td>Grundfläche mal Höhe</td></tr>
+            <tr><td>Würfel</td><td>V = a³</td><td>a ist die Kantenlänge</td></tr>
+            <tr><td>Kreiszylinder</td><td>V = πr²h</td><td>Grundfläche des Kreises mal Höhe</td></tr>
+            <tr><td>Kreiskegel</td><td>V = ⅓πr²h</td><td>ein Drittel des passenden Zylinders</td></tr>
+            <tr><td>Pyramide</td><td>V = ⅓Gh</td><td>G ist die Grundfläche</td></tr>
+            <tr><td>Pyramidenstumpf</td><td>V = h/3 · (G₁ + √(G₁G₂) + G₂)</td><td>G₁ ist die untere, G₂ die obere Grundfläche</td></tr>
+            <tr><td>Kugel</td><td>V = ⁴⁄₃πr³</td><td>r ist der Radius</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Formelzeichen und Bezeichnungen</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Zeichen</th><th>Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>Volumen des Körpers</td></tr>
+            <tr><td>A</td><td>Flächeninhalt eines Querschnitts</td></tr>
+            <tr><td>O</td><td>Oberfläche, also Summe aller äußeren Flächen</td></tr>
+            <tr><td>M</td><td>In Formeln: Mantelfläche ohne Grund- und Deckfläche; als Punkt in der Kugelskizze: Mittelpunkt</td></tr>
+            <tr><td>G</td><td>Flächeninhalt der Grundfläche; G₁ ist beim Pyramidenstumpf die untere, G₂ die obere Grundfläche</td></tr>
+            <tr><td>h</td><td>Senkrechte Körperhöhe; beim Stumpf der Abstand zwischen den parallelen Grundflächen</td></tr>
+            <tr><td>H</td><td>Gesamthöhe der ungekürzten Pyramide im Strahlensatz</td></tr>
+            <tr><td>r, d</td><td>Radius und Durchmesser eines Kreises; d = 2r</td></tr>
+            <tr><td>s</td><td>Mantellinie des Kegels (schräge Strecke von der Spitze zum Rand)</td></tr>
+            <tr><td>l</td><td>Gemeinsame, zur Grundkante senkrechte Seitenhöhe bei einer regelmäßigen Pyramide bzw. schräge Seitenhöhe der Trapeze beim geraden regelmäßigen Pyramidenstumpf; nicht mit der Körperhöhe h verwechseln</td></tr>
+            <tr><td>p</td><td>Umfang der Grundfläche einer regelmäßigen Pyramide</td></tr>
+            <tr><td>U₁, U₂</td><td>Umfang der unteren bzw. oberen Grundfläche des Pyramidenstumpfs</td></tr>
+            <tr><td>a, b, c</td><td>Kantenlängen; beim quadratischen Pyramidenstumpf a oben und b unten</td></tr>
+            <tr><td>π</td><td>Kreiszahl (für Näherungen hier 3,14)</td></tr>
+            <tr><td>x</td><td>Höhe eines Querschnitts über dem Boden des Halbkugel-Zylinder-Vergleichs; im passenden Kegel ist zugleich der Querschnittsradius</td></tr>
+            <tr><td>z</td><td>Höhe des betrachteten Punktes im Meridianschnitt der Kugel, gemessen vom Mittelpunkt</td></tr>
+            <tr><td>ρ</td><td>Radius des Kugelquerschnitts und des flächengleichen Vergleichskreises</td></tr>
+            <tr><td>k</td><td>Längenmaßstab kleine zu großer Pyramide beim Pyramidenstumpf</td></tr>
+            <tr><td>Δz, Δs</td><td>Kleine Höhen- bzw. schräge Breite eines Kugelbandes in der anschaulichen Oberflächenherleitung</td></tr>
+            <tr><td>T₁, T₂, T₃</td><td>Bezeichnungen der drei Tetraeder in der Dreiecksprisma-Skizze</td></tr>
+            <tr><td>A, B, C; A′, B′, C′</td><td>Eckpunkte der beiden Dreiecksflächen des Prismas; der Strich kennzeichnet den jeweils entsprechenden Punkt auf der zweiten Fläche</td></tr>
+            <tr><td>S</td><td>Spitze der großen Pyramide in der Strahlensatz-Skizze</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Rechenroutine:</strong>
+        <ol>
+          <li>Skizze anfertigen und gegebene Maße eintragen.</li>
+          <li>Gesuchte Größe und passende Formel festlegen.</li>
+          <li>Einheiten angleichen; bei Durchmesserangaben zuerst r = d/2 berechnen.</li>
+          <li>Werte mit Klammern einsetzen und sorgfältig rechnen.</li>
+          <li>Ergebnis mit passender Einheit angeben: Volumen in Kubikeinheiten, Oberfläche in Flächeneinheiten.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Jahrgang 10 · Körperberechnung · Mit „Weiter“ und „Zurück“ durch die Herleitung gehen; Musterlösungen lassen sich nach den Übungen aufklappen. Zum Drucken im Browser „Drucken“ wählen.</p>
+  </footer>
+<script>
+  const learningGoals = {
+    zylinder: [
+      "Ich erkenne die gleichen Grundflächen und Höhen der Füllkörper.",
+      "Ich verfolge, wie die erste Kegelfüllung ein Drittel des Prismenvolumens einnimmt.",
+      "Ich ergänze die zweite Füllung zum Zwei-Drittel-Stand.",
+      "Ich folgere das Volumenverhältnis aus drei vollständigen Kegelfüllungen.",
+      "Ich bestimme die Mantelfläche aus Umfang und Höhe des Zylinders.",
+      "Ich ergänze die beiden Kreisflächen zur Zylinderoberfläche."
+    ],
+    kegel: [
+      "Ich erkenne Grundkreis und senkrechte Höhe als Vergleichsgrößen.",
+      "Ich bestimme den Flächeninhalt des Grundkreises.",
+      "Ich vergleiche Kegel- und Zylindervolumen bei gleicher Grundfläche und Höhe.",
+      "Ich leite daraus ein Drittel der Grundfläche mal Höhe ab.",
+      "Ich leite die Mantellinie s mit dem Satz des Pythagoras her.",
+      "Ich bestimme die Mantelfläche aus dem Kreissektor.",
+      "Ich ergänze die Grundfläche zur Kegeloberfläche."
+    ],
+    pyramide: [
+      "Ich erinnere die Volumenformel des passenden Prismas.",
+      "Ich verfolge die Teilung eines Dreiecksprismas in drei Tetraeder.",
+      "Ich setze die erste Pyramidenfüllung in das Prisma ein.",
+      "Ich ergänze mit einer zweiten Füllung zwei Drittel des Prismas.",
+      "Ich folgere die Volumenformel aus der dritten Füllung.",
+      "Ich addiere Grundfläche und dreieckige Mantelflächen zur Oberfläche."
+    ],
+    stumpf: [
+      "Ich stelle den Stumpf als Differenz zweier ähnlicher Pyramiden dar.",
+      "Ich verknüpfe Grundflächen und Höhen der ähnlichen Pyramiden.",
+      "Ich stelle das Stumpfvolumen als Differenz auf.",
+      "Ich stelle die Höhenbeziehung nach der Gesamthöhe H um.",
+      "Ich setze die Flächen- und Höhenverhältnisse in die Volumendifferenz ein.",
+      "Ich vereinfache den Bruch mithilfe der Differenz von Kuben.",
+      "Ich schreibe die Terme mit den beiden Grundflächen G₁ und G₂.",
+      "Ich erkenne Grundflächen und Trapeze im abgewickelten Netz.",
+      "Ich berechne die Oberfläche aus den Trapezflächen und Grundflächen."
+    ],
+    kugel: [
+      "Ich markiere den Kugelradius als zentrale Maßgröße.",
+      "Ich vergleiche die horizontalen Querschnitte zweier Körper.",
+      "Ich berechne Volumen von Zylinder und entferntem Kegel.",
+      "Ich leite daraus erst das Halbkugel- und dann das Kugelvolumen ab.",
+      "Ich zerlege die Kugeloberfläche gedanklich in dünne Bänder.",
+      "Ich ordne die Bänder Streifen am passenden Zylindermantel zu.",
+      "Ich bestimme die Kugeloberfläche mit der Zylindermantelformel."
+    ]
+  };
+
+  document.querySelectorAll("[data-animation]").forEach((animation) => {
+    const steps = [...animation.querySelectorAll(".anim-step")];
+    const visuals = [...animation.querySelectorAll(".anim-drawing [data-step]")];
+    const previous = animation.querySelector("[data-previous]");
+    const next = animation.querySelector("[data-next]");
+    const replay = animation.querySelector("[data-replay]");
+    const progress = animation.querySelector("[data-progress]");
+    const goals = learningGoals[animation.dataset.animation];
+    if (!goals || goals.length !== steps.length || visuals.length !== steps.length) {
+      throw new Error(`Unvollständige Animationsschritte: ${animation.dataset.animation}`);
+    }
+    let current = 0;
+
+    const showStep = (index) => {
+      current = Math.max(0, Math.min(index, steps.length - 1));
+      steps.forEach((step, stepIndex) => { step.hidden = stepIndex !== current; });
+      visuals.forEach((visual, stepIndex) => { visual.toggleAttribute("hidden", stepIndex !== current); });
+      let goal = steps[current].querySelector(".step-goal");
+      if (!goal) {
+        goal = document.createElement("p");
+        goal.className = "step-goal";
+        steps[current].querySelector("h4").after(goal);
+      }
+      goal.textContent = `Teilziel: ${goals[current]}`;
+      previous.disabled = current === 0;
+      next.disabled = current === steps.length - 1;
+      progress.textContent = `Schritt ${current + 1} von ${steps.length}`;
+    };
+
+    previous.addEventListener("click", () => showStep(current - 1));
+    next.addEventListener("click", () => showStep(current + 1));
+    replay.addEventListener("click", () => showStep(0));
+    showStep(0);
+  });
+
+  document.querySelectorAll("[data-pyramid-builder]").forEach((builder) => {
+    const buttons = [...builder.querySelectorAll("[data-piece]")];
+    const cells = [...builder.querySelectorAll("[data-cell]")];
+    const status = builder.querySelector("[data-builder-status]");
+    const reset = builder.querySelector("[data-builder-reset]");
+    let placed = 0;
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const cell = cells.find((item) => item.dataset.cell === button.dataset.piece);
+        cell.setAttribute("data-filled", "");
+        button.disabled = true;
+        button.setAttribute("aria-pressed", "true");
+        placed += 1;
+        status.textContent = placed === 3
+          ? "Das Prisma ist voll: Drei Pyramidenfüllungen entsprechen einem Prismenvolumen."
+          : `${placed} von 3 Teilen eingesetzt.`;
+      });
+    });
+
+    reset.addEventListener("click", () => {
+      cells.forEach((cell) => cell.removeAttribute("data-filled"));
+      buttons.forEach((button) => {
+        button.disabled = false;
+        button.setAttribute("aria-pressed", "false");
+      });
+      placed = 0;
+      status.textContent = "Noch kein Teil eingesetzt: 0 von 3.";
+    });
+  });
+</script>
+</body>
+</html>

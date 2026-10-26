@@ -1,9 +1,42 @@
-# Körperberechnung – Jahrgang 10
+# Kreis und Körper – Jahrgang 10
 
 **Lernseite online:** <https://joergbertholdgnw-cmd.github.io/Berechnung_Koerper_Jg10/>
 
-Das Unterrichtsmaterial liegt als eigenständige, druckfreundliche Lernseite in [index.html](./index.html).
+Interaktive Lernseite zur Unterrichtsreihe „Kreis- und Körperberechnung“ in Jahrgang 10 (Gymnasium Niedersachsen, G9).
 
-Die Seite führt von der Wiederholung zu Quader und Würfel über Kreiszylinder, Kreiskegel, Pyramide und Pyramidenstumpf zur Kugel. Sie enthält eine Zylinder-Füllanimation sowie bedienbare Schritt-für-Schritt-Animationen zur Volumen- und Oberflächenformel von Kegel, Pyramide, Pyramidenstumpf und Kugel. Das Zylindernetz leitet die Mantelfläche aus Umfang und Höhe her; das Pyramiden-Netz zeigt die Summe der einzelnen Dreiecksflächen und den Sonderfall der regelmäßigen Pyramide. Bei der Mantelfläche des Pyramidenstumpfs sind die Umfänge U₁ und U₂ direkt den unteren und oberen Grundflächen zugeordnet. Die Pyramidenformel wird durch drei nacheinander eingesetzte Pyramidenfüllungen veranschaulicht; die Stumpfherleitung macht Strahlensatz, Ähnlichkeits- und Umformungsschritte einzeln sichtbar. Die Kugelquerschnitte werden mit einer zusätzlichen Vergleichsskizze nachvollziehbar gemacht; die Herleitung der Kugeloberfläche wird als anschauliche Grenzwert-Idee kenntlich gemacht. Die einzelnen Animationsschritte weisen Lernziele aus; Verständnisfragen mit Lösungsideen, Rechenübungen mit Lösungen und eine Selbsteinschätzung unterstützen das selbstständige Lernen. Eine Übersicht erläutert alle verwendeten Formelzeichen. Die Skizzen sind direkt im HTML als SVG angelegt und werden durch kurze Bildunterschriften erläutert. Ergänzende, thematisch zugeordnete Videolinks stehen bei Kegel, Pyramide, Pyramidenstumpf und Kugel.
+Die Seite zeigt den Lernweg als Karte mit „Du bist hier“-Markierung. Jede Station hat:
+Ziele (Ich-kann-Sätze) → Animation → Herleitung Schritt für Schritt → Lernvideo → Kernfragen zur Herleitung → Lernprotokoll (Aufgabe, Umkehraufgabe, Vertiefung, Rückblick).
+Der Fortschritt wird nur im Browser der Schülerin oder des Schülers gespeichert (localStorage), ohne Anmeldung.
 
-Zum Verwenden `index.html` in einem Browser mit aktiviertem JavaScript öffnen; die Seite benötigt keine Installation und keine Internetverbindung. Zum Drucken kann die Druckfunktion des Browsers genutzt werden.
+## Stand
+
+| Station | Thema | Stand |
+|---|---|---|
+| 0 | Startcheck | fertig |
+| 1 | Kreisumfang und π (mit Messreihe und Lernprotokoll) | fertig |
+| 2 | Flächeninhalt des Kreises (mit Lernprotokoll) | fertig |
+| 3 | Kreisausschnitt und Kreisbogen | fertig |
+| 4 | Zylinder: Netz und Oberfläche | fertig |
+| 5 | Zylinder: Volumen | fertig |
+| 6 | Pyramide und Kegel: Oberfläche | fertig |
+| 7 | Pyramide und Kegel: Volumen | fertig |
+| 8 | Kugel: Volumen | fertig |
+| 9 | Kugel: Oberfläche | fertig |
+| 10 | Zusammengesetzte Körper und Modellieren | fertig |
+
+Der vollständige Lernweg steht in [docs/lernweg.md](docs/lernweg.md).
+
+## Zusatzmaterial
+
+Die druckfreundliche Lernseite „Körperberechnung“ (Quader und Würfel bis Kugel, mit Schritt-für-Schritt-Animationen, Rechenübungen und Selbsteinschätzung) liegt in `koerperberechnung.html` und ist online erreichbar unter <https://joergbertholdgnw-cmd.github.io/Berechnung_Koerper_Jg10/koerperberechnung.html>.
+
+## Dateien
+
+- `src/lernseite.html` – Quelltext der Stationen-Seite (HTML, CSS, JavaScript in einer Datei)
+- `index.html` – daraus gebaute Startseite für GitHub Pages; nach Änderungen an `src/lernseite.html` `./build.sh` ausführen
+- `koerperberechnung.html` – eigenständige Lernseite „Körperberechnung“ (wird nicht gebaut, direkt bearbeiten)
+- `docs/lernweg.md` – Stationen, Lernziele und Videovorschläge
+
+## Veröffentlichen
+
+In den Repository-Einstellungen unter *Pages* den Branch `main` und den Ordner `/ (root)` wählen. Die Seite ist dann unter der oben genannten Adresse erreichbar.
