@@ -149,6 +149,8 @@ header.top { display: grid; gap: 10px; }
 .legend i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--line); display: inline-block; }
 .legend i.l-done { background: var(--accent); border-color: var(--accent); }
 .legend i.l-cur { border-color: var(--mark); }
+.store-note { margin: 14px 0 0; padding: 10px 14px; border-left: 4px solid var(--mark); border-radius: 6px; background: var(--mark-soft); font-size: 0.9rem; line-height: 1.45; }
+.store-note strong { color: var(--mark); }
 
 /* Station */
 .station { display: grid; gap: 22px; }
@@ -288,6 +290,7 @@ textarea { width: 100%; min-height: 110px; font: inherit; color: var(--ink); bac
       <span><i class="l-cur"></i>du bist hier</span>
       <span><i></i>noch offen</span>
     </div>
+    <p class="store-note"><strong>Wichtig:</strong> Dein Fortschritt wird nur auf diesem Gerät in diesem Browser gespeichert. Öffne die Seite deshalb immer im selben Browser, nicht im privaten Modus, und lösche die Browserdaten nicht.</p>
   </section>
 
   <main id="station" class="station" aria-live="polite"></main>
